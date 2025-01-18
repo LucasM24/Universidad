@@ -28,181 +28,59 @@ centered, draw=black, fill=blue!15]
 \begin{document}
 \maketitle
 
-\section{Unidad 1 - Modelo Entidad Relación}
+\include{Unidades/Unidad01}
 
-  \subsection{Estructura del Sistema de Base de Datos}
-
-    Un sistema gestor de base de datos consiste en una colección organizada de
-    elementos de datos interrelacionados (DB) y un conjunto de programas para
-    almacenar, modificar y acceder dichos elementos de datos.
-    El proposito de un sistema gestor de base de datos es proporcionarle al
-    usuario una visión abstracta de los datos, es decir esconder ciertos
-    detalles de como se almacenan y mantienen los datos. \\
-    Esto se logra a través de tres \textbf{niveles de abstracción} sobre la
-    realidad física de los datos. 
-
-    \begin{itemize}
-      \item Nivel de vistas: Corresponde a grupos de usuarios o a programas de
-        aplicación.
-      \item Nivel lógico: Corresponde a los datos y las relaciones entre ellos.
-      \item Nivel físico: Corresponde a como se almacenan los datos.
-    \end{itemize}
-
-    Algunas de las tareas que lleva a cabo un sistema gestor de base de datos
-    son:
-
-    \begin{itemize}
-      \item Evita \textbf{redundancia} e \textbf{inconsistencia} de datos.
-      \item Permite un acceso eficiente a los datos.
-      \item Aisla los datos de las aplicaciones.
-      \item Ejecuta las transacciones siguiendo el principio de
-        \textbf{atomicidad}.
-      \item Controla el acceso concurrente a los datos.
-      \item Otorga recuperación de la base de datos en caso de fallas, errores
-        de varios tipos o usos mal intencionados.
-    \end{itemize}
-    % \begin{enumerate}
-    %   \item Crear bases de datos y sus esquemas (schemas - logical structure of the
-    %     data) a través de un lenguaje de definición de datos (data-definition
-    %     language).
-    %   \item Agregar, quitar o modificar datos a través de un lenguaje de
-    %     manipulación de datos (data-manipulation language).
-    %   \item Recuperación de la base de datos en caso de fallas, errores de varios
-    %     tipos o malos usos intencionados.
-    %   \item Controla el accesso a los datos por parte de varios usuarios a la vez,
-    %     no permite interacciones inesperadas entre los usuarios (isolation) y
-    %     tampoco permite acciones parcialmente terminadas sin completar (atomicity).
-    % \end{enumerate}
-
-  \subsection{Base de Datos}
-    Una base de datos contiene información de un dominio en particular. Las
-    bases de datos van cambiando a medida que pasa el tiempo ya que
-    constantemente se insertan, modifican o borran datos de la misma. \\ Al
-    diseño completo de la base de datos se lo denomina \textbf{esquema de base
-    de datos}. Si capturamos la base de datos en un momento en particular
-    obtendremos una \textbf{instancia de base de datos}. Esta instancia nos
-    refleja el estado de una base de datos en un momento determinado. 
-
-  \subsection{Niveles de la Base de Datos}
-  Si implementamos niveles de abstracción para un esquema de base de datos
-  podemos modificar la definición del esquema sin que afecte a un nivel superior
-  de abstracción. Esto nos provee:
-    \begin{itemize}
-      \item Independencia física de los datos.
-      \item Independencia lógica de los datos.
-    \end{itemize}
-
-  \subsection{Modelo de Datos}
-  Un modelo de datos es un conjunto de herramientas conceptuales que nos
-  permiten describir los datos, relaciones entre los datos, semántica de los
-  datos y restricciones de integridad.
-
-  \subsection{Modelo Entidad Relación}
-    \subsubsection{Entidad}
-    Las entidades guardan un tipo de elementos relacionados, descritos por
-    atributos.
-%     \item Entidad Debil: Son entidades que tienen una clave que no es suficiente para identificar los elementos de dicha entidad. Se debe marcar el discriminante el cual debería ser clave pero necesita la clave de la entidad fuerte para poder identificar a dicha entidad. Se denota con linea punteada.
-
-    \subsubsection{Atributo}
-    Los atributos son datos atómicos que sirven para describir a los elementos que pertenecen a una entidad. Los atributos poseen un dominio
-    el cual indica los valores permitidos para dicho atributo. Existen distintos tipos de atributos:
-      \begin{itemize}
-          \item Simple: Contienen un solo valor. Se representa con un óvalo.
-          \item Compuesto: Agrupa atributos que están relacionados entre sí. Por ejemplo el atributo nombre puede estar compuesto por primer
-            nombre, apodo, apellido.
-          \item Multivaluado: Puede tener más de un valor. Por ejemplo, grado académico, teléfono. Se representa con doble óvalo.
-          \item Derivado: Se calcula a partir de otros datos del modelo. Se representa con un óvalo punteado.
-          \item Clave: Toda entidad debe tener un atributo que la identifique de manera unívoca. Puede ser simple o compuesto. Se representa
-            subrayando el contenido del atributo.
-      \end{itemize}
-        \subsubsection{Clave}
-        Las claves nos permiten identificar unívocamente una entidad. Existen
-        distintos tipos de claves:
-          \begin{itemize}
-            \item Primaria: Es/son los atributos que identifican unívocamente a una entidad.La clave primaria cuenta con dos propiedades que
-              son unicidad y irreducibilidad. Unicidad  ya que no puede haber dos tuplas con el mismo valor en la clave primaria e
-              irreducibilidad quiere decir que si quito un atributo ya no me alcanza para identificar univocamente a la entidad.
-            \item Superclave: Es un conjunto de atributos que tiene incluida la clave primaria pero a su vez tiene más atributos.
-            \item Candidata: Es un atributo que se encuentra en un conjunto de posibles claves primarias.
-            \item Foránea: Son aquellos atributos que pueden o no ser clave primaria pero son claves primarias en otra entidad/relación.
-            \item Compuesta: Es una clave primaria o candidata que tiene más de un atributo.
-          \end{itemize}
-        
-          \subsubsection{Relación} Indica como se relacionan las entidades en el modelo. Existen relaciones 1:1, 1:N, N:M. También existen
-          relaciones recursivas las cuales indican una relación entre elementos de la misma entidad. Se representan marcando los dos roles
-          de la relación. Se representan con un rombo. \\ En una relación una entidad puede tener participación total o parcial en dicha
-          relación. Si es una participación total todo elemento de dicha entidad debe estar relacionado con las demás entidades que
-          participen de la relación. Las participaciones parciales son lo opuesto a las totales. Las participaciones totales se representan
-          con doble linea y las participaciones parciales con una sola linea. Si una relación posee atributos se denomina relación
-          descriptiva.
-
-          \subsubsection{Especialización} Nos permite diseñar un subconjunto de entidades dentro de otra entidad. Las especializaciones
-          pueden ser solapadas o dijuntas. Por ejemplo: si tenemos una entidad persona las especializaciones de empleado y cliente nos
-          permiten distinguir los distintos tipos de personas dentro de un dominio determinado. 
-
-          \subsubsection{Generalización} Cuando tenemos atributos en común entre entidades podemos expresar una generalización. Se agrupan
-          las entidades que poseen dichos atributos bajo una nueva entidad que contiene todos los atributos en común y describe
-          semánticamente las entidades dentro de este grupo.
-
-          % \subsubsection{Especialización/Generalización} Si es dijunta indica que una entidad no puede pertenecer a más de una
-          % especialización se representa con una D. Si es Solapada permite que una entidad pertenezca a más de una especialización se
-          % representa con una O. Otra categoría es si es parcial o dijunta. Esto nos indica si una especialización es total toda entidad debe
-          % pertenecer a una de las especializaciones. En cambio si es dijunto una entidad puede o no pertenecer a dicha especialización. La
-          % especialización total y dijunta es la más restrictiva de las especializaciones.
-
-          \subsubsection{Unión} Nos permite encasillar a varias entidades distintas dentro de un rol o una categoría. Estas
-          entidades no son similares semánticamente pero si comparten el mismo rol. Las uniones también pueden ser totales o parciales.
-
-          % \item Derivación union: Se deriva de la misma forma que una relación uno a muchos
-
-\section{Unidad 2 - Teoría y diseño de bases de datos relacionales}
+\section{Unidad 2 - Teoría y Diseño de Bases de Datos Relacionales}
 
   \subsection{Formas Normales}
-  Una Forma Normal es una restricción sobre un esquema de Base de Datos relacionales con dependencias funcionales que previene ciertas propiedades indeseables. Cumplir ciertas formas normales garantiza buenos diseños de bases de datos.
-  El propósito de las formas normales es evitar redundancia y eliminar inconsistencias y anomalías de inserción y borrado.
+  Una Forma Normal es una restricción sobre un esquema de Base de Datos relacionales con dependencias funcionales que previene ciertas
+  propiedades indeseables. Cumplir ciertas formas normales garantiza buenos diseños de bases de datos. El propósito de las formas normales
+  es evitar redundancia y eliminar inconsistencias y anomalías de inserción y borrado.
 
-\subsection{Dependencias Funcionales}
-Una dependencia funcional es una restricción de valor único que se aplica sobre dos conjuntos de atributos X e Y de un esquema de relación de una base de datos. Constituye entonces una generalización del concepto de clave. Nos permite expresar hechos sobre el dominio que estamos modelando con nuestra base de datos. Esta restricción especifica que el valor del o los atributos en X determinan un único valor de los atributos en Y en todos los estados de la relación. Estás dependencias las utilizamos para normalizar los esquemas de relaciones de una base de datos.
+  \subsubsection{Dependencias Funcionales}
+  Una dependencia funcional es una restricción de valor único que se aplica sobre dos conjuntos de atributos X e Y de un esquema de relación
+  de una base de datos. Constituye entonces una generalización del concepto de clave. Nos permite expresar hechos sobre el dominio que
+  estamos modelando con nuestra base de datos. Esta restricción especifica que el valor del o los atributos en X determinan un único valor
+  de los atributos en Y en todos los estados de la relación. Estás dependencias las utilizamos para normalizar los esquemas de relaciones de
+  una base de datos.
 
-\subsection{Primera forma normal - 1FN}
-Un esquema de relación R está en 1FN si los valores del dominio de A son atómicos, siendo A cada uno de los atributos A en R, es decir las valores de los atributos no son listas, cojuntos de valores o valores compuestos.
+  \subsubsection{Primera Forma Normal - 1FN}
+  Un esquema de relación R está en 1FN si los valores del dominio de A son atómicos, siendo A cada uno de los atributos A en R, es decir las
+  valores de los atributos no son listas, cojuntos de valores o valores compuestos. La 1FN establece que los dominios de los atributos deben
+  incluir solo valores atómicos (simples, indivisibles) y prohíbe entonces las “relaciones dentro de relaciones” o las “relaciones como
+  atributos de tuplas”. \\ \\
+  Ventajas de la 1FN
+  \begin{itemize}
+      \item Representación Tabular
+      \item Lenguajes de Consulta más simples
+      \item Definición de restricciones más simples
+  \end{itemize}
+  Desventajas de la 1FN
 
-La 1FN establece que los dominios de los atributos deben incluir solo valores atómicos (simples, indivisibles) y prohíbe entonces las “relaciones dentro de relaciones” o las “relaciones como atributos de tuplas”
+  \begin{itemize}
+      \item Inconsistencia.
+      \item Redundancia.
+      \item Anomalías de inserción y de borrado.
+  \end{itemize}
+  Ejemplo de un esquema de relación en 1FN: \\
+  \begin{table}[h]
+    \begin{tabular}{| l | l | l | l | l| l|}
+    \hline
+    Id\_empleado & Dni & Nombre & Apellido & Id\_proyecto & Descripción\_proyecto\\ \hline
+    1 & 45789777 & Martin & Perez & A1 & Proyecto sobre microprocesadores\\ \hline
+    2 & 45789777 & Lucas & Martinez & A1 & Proyecto sobre programación\\ \hline
+    3 & 33765922 & María & García & A2 & Proyecto sobre compiladores\\ \hline
+    4 & 33765922 & Alejandra & Carrizo & A2 & Proyecto sobre compiladores\\ \hline
+    5 & 33444222 & Berta & Gonzalez & A3 & Proyecto sobre compiladores\\ \hline
+    \end{tabular}
+  \end{table}
 
-Ventajas de la 1FN
-
-\begin{itemize}
-    \item Representación Tabular
-    \item Lenguajes de Consulta más simples
-    \item Definición de restricciones más simples
-\end{itemize}
-
-Desventajas de la 1FN
-
-\begin{itemize}
-    \item Inconsistencia.
-    \item Redundancia.
-    \item Anomalías de inserción y de borrado.
-\end{itemize}
-Ejemplo de un esquema de relación en 1FN: \\
-\begin{table}[h]
-\begin{tabular}{| l | l | l | l | l| l|}
-\hline
-Id\_empleado & Dni & Nombre & Apellido & Id\_proyecto & Descripción\_proyecto\\ \hline
-1 & 45789777 & Martin & Perez & A1 & Proyecto sobre microprocesadores\\ \hline
-2 & 45789777 & Lucas & Martinez & A1 & Proyecto sobre programación\\ \hline
-3 & 33765922 & María & García & A2 & Proyecto sobre compiladores\\ \hline
-4 & 33765922 & Alejandra & Carrizo & A2 & Proyecto sobre compiladores\\ \hline
-5 & 33444222 & Berta & Gonzalez & A3 & Proyecto sobre compiladores\\ \hline
-\end{tabular}
-\end{table}
-
-\begin{itemize}
-    \item Inconsistencia: En este ejemplo podemos ver inconsistencia en los datos ya que en la tupla con id\_empleado 1 y 2 podemos ver el mismo proyecto pero con distintas descripciones.
-    \item Redundancia: Si vemos las tuplas  3 y 4 vemos que se repite información en este caso la descripción del proyecto.
-    \item Anomalía de Inserción: Si insertamos una tupla con id\_proyecto A2 con descripción distinta a la de las tuplas ya existentes no podemos saber cual es la descripción correcta del proyecto A2.
-    \item Anomalía de Borrado: Si borramos la tupla con id\_proyecto a3 perdemos la información tanto del proyecto como de la persona.
-\end{itemize}
+  \begin{itemize}
+      \item Inconsistencia: En este ejemplo podemos ver inconsistencia en los datos ya que en la tupla con id\_empleado 1 y 2 podemos ver el mismo proyecto pero con distintas descripciones.
+      \item Redundancia: Si vemos las tuplas  3 y 4 vemos que se repite información en este caso la descripción del proyecto.
+      \item Anomalía de Inserción: Si insertamos una tupla con id\_proyecto A2 con descripción distinta a la de las tuplas ya existentes no podemos saber cual es la descripción correcta del proyecto A2.
+      \item Anomalía de Borrado: Si borramos la tupla con id\_proyecto a3 perdemos la información tanto del proyecto como de la persona.
+  \end{itemize}
 
 \subsection{Segunda forma normal - 2FN}
 Un esquema de relación R está en 2FN si está en 1FN y para cada atributo no primo en R tiene una dependencia funcional total con alguna clave de R.
