@@ -35,59 +35,6 @@ centered, draw=black, fill=blue!15]
 
 \include{Unidades/Unidad01}
 \include{Unidades/Unidad02}
-
-
-\section{Unidad 3 - Modelo Relacional}
-
-\subsection{Dependencias Funcionales}
-Existe una teoría de diseño para las relaciones que nos permite examinar un diseño cuidadosamente y realizar mejoras basándonos un unos pocos principios.
-La teoría comienza haciéndonos establecer las restricciones que se aplican a la relación. La restricción más común es la dependencia funcional es una declaración de un tipo que generaliza la idea de una clave para la relación.
-En la teoria del diseño de bases de datos relacionales existe un concepto llamado dependencias funcionales el cual es una declaración de tipo que generaliza la idea de una clave para una relación.
-Una Dependencia funcional sobre una relación R es una proposición de la forma:
-Si dos tuplas de r coinciden en las atributos A1, A2, ... , An entonces también coincidirán en otro atributo B.
-A1, A2, ... , An => B es decir decimos que A1, A2, ... An determinan funcionalmente a B
-Es decir las tuplas poseen los mismos valores en sus componentes respectivas para cada uno de esos atributos entonces también coincidirán en otro atributo B.
-
-\subsection{Restricciones de Integridad Referencial}
-Antes de definir que es una restricción de integridad referencial debemos definir el concepto de clave primaria y clave foránea.
-Una clave primaria es un atributo el cual nos permite identificar unívocamente a una entidad y por lo tanto identificar unívocamente a cada tupla de esa entidad. Ahora podemos definir que es una clave foránea. Una clave foránea es un atributo que es clave primaria de otra relación.
-Las restricciones de integridad referencial son especificadas entre dos relaciones y se utilizan para mantener la consistencia entre las tuplas en ambas relaciones. Es decir una tupla de una relación A que hace referencia a una tupla de otra relación B debe referir a una tupla existente de esa relación B.
-Con esto logramos que nuestra base de datos se mantenga en un estado consistente.
-
-Sobre la clave foránea se definen un conjunto de reglas que son:
-\begin{itemize}
-\item Regla de nulos - inserción?: Establece si es posible colocar nulos en las claves foráneas.
-\item Regla de Borrado: Establece restricciones al momento de eliminar una tupla en la base de datos.
-\item Regla de actualización: Establece restricciones al momento de actualizar una tupla de la base de datos.
-\end{itemize}
-Reglas de actualización: Si se intenta actualizar el id de una tupla y a su vez dicho id es clave foranea en otra relación de la base de datos se aplican las siguientes reglas: 
-\begin{itemize}
-\item Restringir: Cuando se actualiza una clave primaria en una relación y dicha clave es clave foranea en otras relaciónes esta regla evita dicha modificación.
-\item Propagar: Cuando se actualiza la clave primaria de una tupla y dicha clave es clave foranea en otras relaciones esta regla actualiza la clave foranea en todas las tuplas que la utilicen.
-\item Colocar Nulos: Al actualizar el id de una tupla en una base de datos si dicho id es clave foranea en otra relación esta regla setea dichas claves en null.
-\end{itemize}
-Reglas de Borrado: Si se intenta borrar una tupla de la cual su id es clave foranea en alguna otra relación en la base de datos. Las reglas actuan de la siguiente manera:
-\begin{itemize}
-    \item Restringir: Esta regla restringe ese comportamiento y no lo permite.
-    \item Propagar: Esta reglar borra la tupla seleccionada y luego borra todas las tuplas en la base de datos que tenga como clave foranea el id de la tupla borrada.
-    \item Colocar nulos: Al borrar una tupla en una entidad esta regla reemplaza el id de la tupla eliminada en las relaciones que tienen dicho id como clave foranea por el valor null.
-\end{itemize}
-
-\subsection{Algebra relacional y calculo de dominios}
-El algebra relacional es el conjunto basico de operaciones para el modelo relacional. Estas operaciones permiten al usuario construir consultas como expresiones de algebra relacional. El algebra relacional es muy importante por varias razones.
-\begin{itemize}
-    \item Provee los fundamentos formales prar las operaciones del modelo relacional.
-    \item Se utiliza como base para la implementación y optimización de consultas en el proceso de consulta y son una parte integrl en los modulos de optimización en las los sistemas gestores de bases de datos relacionales.
-    \item Algunos de sus conceptos son incorporados dentro de lenguaje de consulta SQL standard.
-\end{itemize}
-El cálculo relacional provee un lenguaje declarativo de alto nivel para especificar consultas relacionales.
-\vspace{2em}
-\begin{center}
-   \begin{tikzpicture}[node distance=2cm]
-        \node (empleado) [startstop] {Empleado};
-        \node (departamento) [startstop, below of= empleado] {Departamento};
-        \draw [arrow] (empleado) -- (departamento);
-    \end{tikzpicture} 
-\end{center}
+\include{Unidades/Unidad03}
 
 \end{document}
