@@ -1,0 +1,125 @@
+\section{Unidad 04 - Modelo de Datos Objeto Relacional}
+\noindent Existen tres enfoques para lograr persistencia de datos en el paradigma Orientado a Objetos.
+
+\begin{enumerate}
+  \item \textbf{Bases de Datos Orientadas a Objetos}: Usando un lenguaje orientado a objetos nativo.
+  \item \textbf{Bases de Datos Objeto-Relacionales}: Agregando características orientadas a objetos a las bases de datos relacionales.
+  \item \textbf{Mapeo Objeto-Relacional (ORM)}: Realizando conversiones entre ambos sistemas.
+\end{enumerate}
+
+\subsection{Bases de Datos Orientadas a Objetos}
+Utilizamos lenguajes de programación orientados a objetos (Java, Smalltalk, etc) extendidos que nos permiten persistir información. La
+información se representa mediante objetos como los presentes en la programación orientada a objetos. Es una buena elección cuando
+necesitamos un buen rendimiento al manipular tipos de datos complejos. Proporcionan costos de desarrolo más bajos ya que al utilizar el
+mismo tanto para programar como para persistir la información es solo cuestion de familiarizarse con funciones que permiten la persistencia.
+Esto ayuda a agilizar el desarrollo y en cierta medida facilitar el mantenimiento tanto para la aplicación como para la base de datos.
+
+Algunos de los conceptos de las bases de datos orientadas a objetos importantes:
+\begin{itemize}
+  \item Manejo de Objetos Complejos.
+  \item Identidad de los Objetos.
+  \item Lenguajes de Programación Orientados a Objetos.
+\end{itemize}
+
+\subsubsection{Objetos Complejos}
+Un objeto complejo es un objeto que contiene en su definición otros objetos, esto forma una jerarquía de continentes. Por ejemplo: Un objeto
+Bicicleta puede contener otros objetos como rueda, cambio, freno, etc. Un objeto complejo se representa mediante un grafo acíclico dirigido
+(GAD).
+
+\subsubsection{Identidad de los Objetos}
+En orientación a objetos no es necesario que el usuario le proporcione un identificador al objeto, esto lo hace el sistema, al crearse un
+neuvo objeto el sistema automaticaménte el asigna un identificador de objeto (OID). Estos identificadores son únicos e inmutables es decir
+no cambian y no se reasignan. Al ser direcciones de memoria no son fáciles de recordar y además son únicos dentro de un sistema cuando yo
+traduzco a otro sistema esos identificadores no se van a mantener.
+
+\subsubsection{Lenguajes de Programación Orientados a Objetos}
+Estos lenguajes permiten la persistencia de datos es decir almacenarlos en un disco duro, son lenguajes extendidos ya que mediante
+constructores nos permiten el tratamiento de datos persistentes esto hace que el lenguaje de consulta esté totalmente integrado con el
+lenguaje anfitrión.
+
+Algunos inconvenientes de los lenguajes OO es que son potentes y complejos por lo que resulta más sencillo cometer errores que dañen la base
+de datos. Es complejo realizar optimizaciones por ejemplo de reducción de E/S a disco ya que está integrado con el mismo lenguaje
+posiblemente se podría realizar una optimización externa al lenguaje de programación.
+
+\subsubsection{Mecanismos de Persistencia}
+Los lenguajes de programación orientados a objetos realizan la persistencia utilizando mecanismos como constructores, funciones,
+primitivas,etc. Hay cuatro tipos de formas de lograr persistencia:
+
+\begin{itemize}
+  \item Persistencia por Clases: Se declara una clase persistente y todos los objetos que sean instancias de dicha clase serán persistentes
+    de manera predeterminada.
+  \item Persistencia por Creación: Se crea la clase como transitoria es decir solo va a estar en memoria pero al momento de crear los
+    objetos de esa clase de acuerdo a la manera de crear se decide si son objetos persistentes o no.
+  \item Persistencia por Marca: Los objetos se crean originalmente como transitorios y al momento de decidir si se persiste o no, se marca
+    efectivamente como persistente.
+  \item Persistencia por Referencia: En este enfoque se declara como persistente uno o varios objetos (objeto raíz) de manera explícita y un
+    objeto solo sera persistente si se hace referencia a él de manera directa o indirecta desde el objeto raíz. Esto provoca que sean
+    persistentes estructuras de datos completas además puede ser costoso debido a la cantidad de referencias y se puede perder la pista de
+    que objetos son persistentes y cuales no.
+\end{itemize}
+
+\subsubsection{Acceso a Objetos Persistentes}
+Una vez que persistimos los objetos necesitamos encontrarlos en la base de datos al momento que necesitemos utilizarlos. Para encontrar
+dichos objetos tenemos tres enfoques:
+\begin{itemize}
+  \item Nombrar Objetos: Podemos darle un nombre al objeto (como se hace con los archivos). Esto resulta poco práctico para grandes
+    cantidades de objetos.
+  \item Utilizar OID: Este enfoque no es muy util ya que los OID son punteros los cuales suelen ser muy largos y dificiles de recordar.
+  \item Extensiones de Clases: Una extensión se define sobre una clase, posee una estructura de datos que contiene todos los objetos
+    persistentes de dicha clase. Es decir la clase persona puede tener muchos objetos instanciados pero los que son persistentes se guardan
+    en la extension de clase. Por ejemplo: La clase persona tendra muchos objetos persona creados algunos persistentes y otros no pero los
+    objetos persitentes estaran guardados en la extensión de la clase persona. Una clase con extensión puede tener una o más claves. Esta
+    clave puede tener una o más propiedades (atributos y asociaciones) cuyos valores están restringidos a ser unicos por cada objeto en la
+    extensión.
+\end{itemize}
+
+\subsubsection{Comparación BDOO - BDR}
+Relaciones:
+
+\begin{itemize}
+  \item DBO: Las relaciones se realizan por medio de referencias a otro objetos pueden ser objetos de la misma clase o no, utilizando los
+    OID. Estas relaciones pueden ser unidireccionales o bidireccionales (mediante inversas generando integridad referencial). Solo existen
+    relaciones binarias.
+  \item DBR: Por medio de valores de atributos (claves foráneas). Pueden existir relaciones N-arias.
+\end{itemize}
+
+Claves:
+
+\begin{itemize}
+  \item DBO: No son necesarias existen los OID. A pesar de que existen los OID son direcciones de memoria lo cual las hace dificil de
+    recordard por eso se utilizan las claves en las extensiones de clases para poder identificar de una forma más sencilla a los distintos
+    objetos de una clase.
+  \item DBR: Las claves son la base del modelo relacional. Tenemos las claves primarias y las claves foráneas utilizadas para implementar
+    integridad referencial. 
+\end{itemize}
+
+Herencia:
+
+\begin{itemize}
+  \item DBO: Se heredan todas las propiedades (atributos, relaciones y operaciones). No puede ser solapada.
+  \item DBR: Se utiliza la restricción de clave primaria y foránea.
+\end{itemize}
+
+Operaciones:
+
+\begin{itemize}
+  \item DBO: Se especifican durante el diseño de la base de datos.
+  \item DBR: Se especifican en etapas siguientes.
+\end{itemize}
+
+\noindent \textbf{Lenguajes de Consulta}:
+
+A pesar de que los mecanismos de persistencia están integrados dentro del mismo lenguaje existen dos lenguajes de consulta para BDOO que
+son.
+
+\begin{itemize}
+  \item DBO:Object Definition Language - Lenguaje de Definición de Objetos (ODL) y Object Query Language - Lenguaje de Consulta de Objetos
+    (OQL). 
+  \item DBR: Se propone SQL con Data Definition Language - Lenguaje de Definición de Datos (DDL) y Data Manipulation Language - Lenguaje de
+    Manipulación de Datos (DML).
+\end{itemize}
+
+% TODO Copiar la tabla de correspondencia en MER y UML
+
+\subsection{Bases de Datos Objeto-Relacionales}
+\subsection{Mapeo Objeto-Relacional}
