@@ -1,20 +1,216 @@
 \section{Unidad 2 - Teoría y Diseño de Bases de Datos Relacionales}
 
-  \subsection{Formas Normales}
-  Una Forma Normal es una restricción sobre un esquema de una base de datos relacional, contiene ciertas dependencias funcionales que
-  previenen propiedades indeseables. Cumplir ciertas formas normales nos garantiza buenos diseños de bases de datos. El propósito de las
-  formas normales es evitar redundancia, eliminar inconsistencias, anomalías de inserción y borrado.
-
-  \subsubsection{Dependencias Funcionales}
+  \subsection{Dependencias Funcionales}
   Una dependencia funcional es una restricción de valor único que se aplica sobre dos conjuntos de atributos X e Y de una relación R
   perteneciente a un esquema de base de datos. Constituye entonces una generalización del concepto de clave. Nos permite expresar hechos
   sobre el dominio que estamos modelando con nuestra base de datos. Esta restricción especifica que el valor del o los atributos en X
   determinan un único valor de los atributos en Y en todos los estados de la relación. Estás dependencias se utilizan para normalizar las
   distintas relaciones de un esquema de base de datos.
 
+  \subsubsection{Algoritmo de Satisfacibilidad}
+  Entrada: Una relación $R$ y una DF $X \Rightarrow Y$.
+
+  Salida: Verdadero si $R$ satisface $X \Rightarrow Y$, falso en caso contrario.
+
+  SATISFACIBILIDAD($R$, $X \Rightarrow Y$)
+    \begin{enumerate}
+      \item Seleccione la relación R sobre sus columnas X para obtener tuplas con valores iguales de X.
+      \item Si cada conjunto de tuplas con valores $X$ iguales tienen el mismo valor para la columna $Y$ entonces retornar verdadero. Caso
+        contrario retornar falso.
+    \end{enumerate}
+
+  \subsubsection{Derivación}
+  Dado un esquema de relación $R$ y un conjunto de dependencias funcionales $F$ podemos deducir todas las dependencias funcionales
+  que pueden existir en $F$ utilizando los axiomas de inferencia.
+
+  \subsubsection{Clausura}
+  La clausura son todas las dependencias funcionales que se pueden deducir $(\models)$ de un conjunto $F$. Se denota con $F^{+}$
+
+  \subsubsection{Algoritmo de Pertenencia}
+  Utilizando la clausura es simple determinar un algoritmo para verificar pertenencia en $F^{+}$ \\
+
+  Entrada: Un conjunto de DFs y una DF $X \Rightarrow Y$.
+
+  Salida: Verdadero si $F \models X \Rightarrow Y$, falso en caso contrario.
+
+  PERTENECE$(F, X \Rightarrow Y)$
+
+  \setlength{\parindent}{15pt}Si $Y \in$ clausura$(X, F)$ entonces retornar verdadero
+
+  \setlength{\parindent}{15pt}sino retornar falso
+
+  \setlength{\parindent}{15pt}terminar
+
+  \subsection{Cubrimientos}
+  Un cubrimiento permite desde un conjunto de DFs $F$ deducir otro conjunto de DFs G.
+
+  \subsubsection{Algoritmo}
+  \noindent Entrada: Dos conjuntos de DFs $F$ y $G$.
+
+  \noindent Salida: Verdadero $F \models G$, en caso contrario falso. \\
+
+  \noindent DEDUCE$(F, G)$
+  
+  \setlength{\parindent}{15pt}comenzar
+
+  \setlength{\parindent}{15pt}deduce $\leftarrow$ verdadero
+  
+  \setlength{\parindent}{15pt}para cada DFs $X \Rightarrow Y$ en $G$ hacer
+
+  \setlength{\parindent}{30pt}deduce $\leftarrow$ deduce y pertenece$(F, X \Rightarrow Y)$
+
+  \setlength{\parindent}{15pt}retornar(deduce)
+
+  \setlength{\parindent}{15pt}terminar
+
+  \subsection{Cubrimiento Equivalente}
+  Un cubrimiento equivalente es cuando desde un conjunto de DFs F se deduce otro conjunto de DFs G y cuando desde es conjunto DFs G se puede
+  deducir F.
+
+  \subsubsection{Algoritmo}
+  \noindent Entrada: Dos conjuntos de DFs $F$ y $G$.
+
+  \noindent Salida: Verdadero $F \equiv G$, en caso contrario falso. \\
+
+  \noindent EQUIVALENCIA$(F, G)$
+  
+  \setlength{\parindent}{15pt}comenzar
+
+  \setlength{\parindent}{15pt}equivalencia $\leftarrow$ deduce$(F, G)$ y deduce$(G, F)$
+
+  \setlength{\parindent}{15pt}retornar(equivalencia)
+
+  \setlength{\parindent}{15pt}terminar
+
+  \subsection{Cubrimiento Minimal}
+  Es un conjunto G equivalente a F el cual tenga la menor cantidad de DFs posibles. Esto nos permite ahorrar espacio de almacenamiento,
+  mayor rendimiento y menos verificaciones cuando la base de datos es modificada.
+
+  Para que un conjunto sea minimal se deben cumplir 3 condiciones:
+  \begin{enumerate}
+    \item \textbf{Atributo simple:} Si hay DFs que tienen más de un atributo en el lado derecho se descomponen dichas dependencias. Ejemplo:
+      Sea $F=\{AC \Rightarrow BD\}$ al descomponer la DF obtenemos $F=\{AC \Rightarrow B, AC \Rightarrow D\}$.
+    \item \textbf{Atributos extraños a izquierda:} Si hay DFs que tienen más de un atributo del lado izquierdo debemos corroborar si
+      alguno de esos atributos es extraño a izquierda. Esto quiere decir que si quitamos dicho atributo la dependencia funcional se sigue
+      cumpliendo. Para esto buscamos la clausura de uno de los atributos del lado izquierdo, si con dicha clausura se sigue cumpliendo la
+      dependencia significa que los demás atributos no eran necesarios para esa dependencia funcional, por lo tanto podemos eliminarlos. Si
+      no se cumple la DF luego de calcular la clausura se realiza el mismo procedimiento con el siguiente atributo y así hasta analizar
+      todos los atributos del lado izquierdo en todas sus posibles combinaciones.
+    \item \textbf{Cubrimiento no redundante:} Tomamos el conjunto F y quitamos una dependencia funcional, realizamos la clausura de
+      los atributos de R sobre F y si encontramos una clausura que dé como resultado el lado derecho de la DF eliminada podemos decir que
+      dicha DF era redundante. Cada vez que quitamos una DF redundante se genera un nuevo conjunto en este caso $F'$. Repetimos este proceso
+      con cada nuevo conjunto que se genere hasta quitar todas las DFs redundantes. Ejemplo: sea $F=\{AC \Rightarrow BD, B \Rightarrow D\}$
+      podemos separar la dependencia funcional $AC \Rightarrow BD$ en $AC \Rightarrow B$ y $AC \Rightarrow D$ con esta descomposición
+      podemos llegar a B y D sin necesidad de utilizar la DF $B \Rightarrow D$ por lo tanto el cubrimiento no redundante es $G=\{AC
+      \Rightarrow B, AC \Rightarrow D\}$.
+  \end{enumerate}
+
+  \subsection{Claves}
+  Yo puedo en base a las dependencias funcionales encontrar cuales son las claves candidatas de un esquema de relación. Para esto debemos
+  partir de un cubrimiento minimal. Para determinar las claves candidatas de un esquema de relación R y un conjunto de DFs F creamos tres
+  conjuntos donde los atributos se clasifican de la siguiente manera:
+
+  Decimos que cada atributo $A_{i}$ en R:
+  \begin{itemize}
+    \item \textbf{Siempre} es parte de la clave si no aparece ni a derecha ni a izquierda en ninguna DF o si solo aparece a la izquierda en
+      las DFs de F.
+    \item \textbf{Nunca} es parte de la clave si aparece solamente a la derecha de las DFs de F.
+    \item \textbf{Talvez} es parte de la clave si aparece a la derecha y a la izquierda en dos o más DFs de F.
+  \end{itemize}
+  Pregunta: Si tengo más de un atributo en siempre y con ninguno de esos puedo generar todo el esquema, las combinaciones con talvez las
+  hago por separado? Es decir cada hacer un producto cartesiano de cada atributo en siempre con los atributos que haya en talvez.
+
+  Respuesta: Si hay más de un atributo en el grupo de siempre, y estoy buscando las claves candidatas tomo todos los atributos como uno solo
+  ya que siempre deben formar parte de la clave.
+
+  \subsection{Descomposición y Propiedades de la Descomposición}
+  \setlength{\parindent}{15pt} Descomponer un esquema de relación R es crear una colección de subconjuntos de R con la particularidad que
+  esos subconjuntos no requieren ser dijuntos. Es decir se permiten elementos repetidos entre dichos subconjuntos. \\ \\
+  El objetivo de la descomposición es evitar redundancias, inconsistencias y anomalías de inserción, y borrado.
+  Definición: La descomposición de un esquema de relación $R=\{A_{1},A_{2},..,A_{n}\}$ es su reemplazo por una colección
+  $\rho=\{R_{1},R_{2},..,R_{k}\}$ de subconjuntos de $R$ tal que $R = R_{1} \cup R_{2} \cup .. \cup R_{n}$. No existe el requerimiento de
+  que los $R_{i}'s$ sean disjuntos. \\
+  Para garantizar una descomposición sin pérdida de información y con preservación de dependencias se necesita imponer una serie de
+  restricciones sobre el conjunto de relaciones resultantes de la descomposición. Estas propiedades son \textbf{join sin pérdida} y
+  \textbf{preservación de dependencias}.
+
+  \subsubsection{Join Sin Pérdida}
+  Al realizar una descomposición podemos perder información. Esta pérdida puede darse a que faltan tuplas o se generan nuevas tuplas dando
+  paso a inconsistencias en los datos. Para verificar que no se perdió información existe el siguiente algoritmo. \\
+  
+  \noindent Parametros de entrada:
+  \begin{itemize}
+    \item un esquema de relación $R=\{A_{1}, A_{2},..,A_{n}\}$.
+    \item un conjunto de DFs $X \Rightarrow Y \in F$.
+    \item una descomposición $\rho=\{R_{1}, R_{2},..,R_{k}\}$.
+  \end{itemize}
+  \noindent Salida:
+  \begin{itemize}
+    \item Falso: Si la descomposición no cumple con la propiedad JSP.
+    \item Verdadero: Si la descomposición cumple con la propiedad JSP.
+  \end{itemize}\mbox{}
+
+  \noindent esJoinSinPerdida($R, F, \rho$)\\
+  Comenzar \\
+  Se construye una tabla con k filas y n columnas. Con $1\leq i \leq k$ y $1\leq j \leq n$. \\
+  En la fila i columna j, si el esquema $R_{i}$ tiene el atributo Aj entonces en esa casilla se coloca aj sino se coloca bij. \\
+  Si logramos una fila solo con aes terminar devuelve Verdadero. \\
+  Sino Repetir para cada DF X->Y en F y hacer: \\
+  Si existen dos o más filas que coinciden en todos los atributos de X se igualan todos los atributos de Y en esa fila.  Se mantiene la
+  prioridad a de aes sobre bes. Se coloca aj sino bij.
+  Hasta que no haya más cambios en alguna fila o una fila tiene todos los atributos con aes.
+  Si alguna fila tiene todos los atributos con aes retornar Verdadero\\
+  Sino retornar falso. \\ \\
+  \noindent Como salida obtendremos verdado en caso de que la descomposición sea join sin pérdida o falso caso contrario.
+  
+  \paragraph{Explicación del algoritmo} \mbox{}
+
+  Debemos crear una tabla con \textbf{n} columnas y \textbf{k} filas. Siendo \textbf{n} la cantidad de atributos que tiene la relación R  y
+  \textbf{k} la cantidad de subrelaciones resultantes de la descomposición. Para ubicarnos en las celdas de la tabla utilizamos los índices
+  i, j con $1\leq i \leq k$ y $1\leq j \leq n$, con i referenciando las filas y j las columnas. La tabla se completa utilizando los
+  subesquemas (filas) y los atributos (columnas), si el subesquema $R_{i}$ tiene en sus elementos el atributo $A_{j}$ entonces en la casilla
+  ij colocamos $a_{j}$ caso contrario colocamos $b_{ij}$, esto se repite hasta completar toda la tabla. Al completar la tabla verificamos si
+  obtuvimos una fila entera de aes, si es así el algoritmo termina y la descomposición cumple con la propiedad de JSP. \\
+  Si no conseguimos una fila entera de aes se toma cada dependencia funcional $X \Rightarrow Y \in F$ y la aplicamos sobre la tabla
+  verificando lo siguiente: Si tenemos una columna X que tiene dos o más atributos iguales, igualamos todos los atributos de la columna Y
+  con aes, en caso de existir más de una a utilizamos el valor que tenga el indice i más pequeño, caso contrario es decir que no existan aes
+  igualamos con bes también dandole prioridad a la b que tenga el índice j más pequeño. \\ Este proceso se repite hasta que logremos una
+  fila completa de aes o ya no se produzcan más cambios al analizar las dependencias funcionales sobre la tabla. Si no se logra una fila
+  completa de aes el algoritmo termina y la salida es falso, por lo tanto la descomposición no cumple con la propiedad de JSP \\
+
+  Preguntas: ¿Siempre hay que aplicar todas las dependencias sobre la tabla o en caso de armar la tabla y encontrar una fila de aes no es necesario?
+  
+  \subsubsection{Preservación de Dependencias}
+  La propiedad preservación de DFs mantiene las restricciones del esquema de relación original. Sea R un esquema de relación y F un conjunto
+  de DFs que se proyectan sobre R. Si queremos descomponer la relación R para alcanzar una forma normal más alta debemos verificar no perder
+  DFs. Para esto debemos averiguar las DFs que se proyectan en cada uno de los $R_{i}$ sobre F. Una vez que obtenemos todas las dependencias
+  de cada subesquema unimos cada $R_{i}$ para crear un nuevo conjunto de DFs G. Por ultimo para comprobar si la descomposición preserva DFs
+  debemos ver que ambos conjuntos sean equivalentes es decir que desde F podemos deducir G y desde G podemos deducir F. Para probar que son
+  equivalentes existen dos formas: 
+
+  Un método es ver aquellas dependencias que se cumplen en un conjunto de DFs y en el otro no y sobre ellas aplicar la clausura y ver si
+  dicha dependencia se proyecto en el otro conjunto. Por ejemplo: Sea F el conjunto de DFs sobre R y G el conjunto de DFs resultado de la
+  union de todas las proyecciones de cada subesquema $R_{i}$. Si en F tengo una DF que no está en G debo calcular la clausura de esa
+  dependencia funcional y ver si se proyecta en G. Si no se proyecta ya podemos decir que la descomposición no preserva dependencias. En
+  cambio si todas las dependencias presentes en F y que no están en G se proyectan podemos decir que la descomposición cumple con la
+  preservación de DFs. Este método tiene el riesgo de que el conjunto G debe estar bien generado. Ya que podemos tener un resultado
+  equivocado es decir afirmar que la descomposición preserva dependencias cuando en realiada no es así.
+
+  El segundo método es utilizando el algoritmo de $R_{i}$ operación en este metodo utilizamos el conjunto de DFs F y los subesquemas que
+  pertenecen a la descomposición. Aplicamos a cada DF de F la siguiente fórmula: $Z \cup ((Z \cap R)^{+} \cap R)$ reemplazamos Z por el lado
+  izquierdo de la DF que se esta verificando y R lo reemplazamos por un $R_{i}$ que contenga a el lado izquierdo de la dependencia
+  funcional. Si no se proyecta la dependencia funcional una vez que probamos todos los subesquemas posibles entonces la descomposición no
+  preserva DFs y el algoritmo termina. Caso contrario si probamos todas las DFs de F y todas se proyectan en sus respectivos subesquemas entonces podemos decir que
+  la descomposición cumple con la propiedad de preservación de DFs.
+
+  \subsection{Formas Normales}
+  \setlength{\parindent}{15pt} Una Forma Normal es una restricción sobre un esquema de una base de datos relacional, contiene ciertas
+  dependencias funcionales que previenen propiedades indeseables. Cumplir ciertas formas normales nos garantiza buenos diseños de bases de
+  datos. El propósito de las formas normales es evitar redundancia, eliminar inconsistencias, anomalías de inserción y borrado.
+
   \subsubsection{Primera Forma Normal - 1FN}
-  Un esquema de relación R está en 1FN si los valores de los dominios del esquema de base de datos son atómicos (simples e indivisibles), es decir las valores de los
-  atributos no son listas, cojuntos de valores o valores compuestos. 
+  Un esquema de relación R está en 1FN si los valores de los dominios del esquema de base de datos son atómicos (simples e indivisibles), es
+  decir las valores de los atributos no son listas, cojuntos de valores o valores compuestos. 
   % La 1FN establece que los dominios de los atributos deben
   % incluir solo valores atómicos (simples, indivisibles) y prohíbe entonces las “relaciones dentro de relaciones” o las “relaciones como
   % atributos de tuplas”. \\ \\
@@ -53,8 +249,8 @@
       \item Anomalía de Borrado: Si borramos la tupla con id\_proyecto a3 perdemos la información tanto del proyecto como de la persona.
   \end{itemize}
 
-  \subsection{Segunda Forma Normal - 2FN}
-  Un esquema de relación R está en 2FN si está en 1FN y para cada atributo no primo en R tiene una dependencia funcional total con alguna
+  \subsubsection{Segunda Forma Normal - 2FN}
+  \setlength{\parindent}{15pt} Un esquema de relación R está en 2FN si está en 1FN y para cada atributo no primo en R tiene una dependencia funcional total con alguna
   clave de R. Es decir cada atributo no primo es irreduciblemente dependiente de una clave primaria. \\
   Como ejemplo veamos si el siguiente esquema está en 2FN: \\ \\
   V: Vuelo, D: Día, P: Piloto, G: Puerta \\
@@ -101,7 +297,7 @@
 
   Habiendo clasificado los atributos primos y no primos, encontrado las claves y usando las dependencias funcionales podemos observar que
   cada atributo no primo tiene una dependencia funcional total con la clave esto se cumple en cada esquema $(R_{1}, R_{2})$. Por lo tanto
-  como cada esquema está en 2FN todo el esquema está en 2FN.
+  como cada esquema está en 2FN todo el esquema está en 2FN. \\
 
   \begin{table}[h]
       \centering
@@ -127,7 +323,7 @@
   Esta relación está en 2FN pero presenta anomalía de actualización por ejemplo modificar la fecha de nacimiento provocaría que el mismo
   ganador tuviera dos fechas de nacimiento distintas.
 
-  \subsection{Tercera Forma Normal - 3FN}
+  \subsubsection{Tercera Forma Normal - 3FN}
   \setlength{\parindent}{15pt} Un esquema de relación R está en 3FN con respecto a un conjunto de dependencias funcionales F si está en 2FN
   y cada atributo no primo no es transitivamente dependiente de una clave. \\
   Segunda definición: Un esquema de relación R está en 3FN con
@@ -212,3 +408,71 @@
 
   \noindent Conclusión: conociendo los atributos primos y no primos de ambas relaciones podemos observar que en ambos casos se cumple que el
   lado izquierdo de las dependencias funcionales es clave por lo tanto el esquema está en 3FN.
+
+  \subsection{Forma Normal de Boyce Codd - FNBC}
+  \setlength{\parindent}{15pt} Un esquema de relación R está en FNBC con respecto a un conjunto de DFs F si para cada DF $X \Rightarrow A$
+  en F con $A \notin X$ se verifica que X es clave o superclave.
+
+  Si observamos la descomposición utilizada como ejemplo para 3FN podemos ver que también cumple con la FNBC ya que todos los lados
+  izquierdos de las dependencias funcionales en ambas relaciones son clave.
+
+  \noindent Nota: En la materia siempre tratamos de partir de cubrimientos minimales entonces en lugar de tener superclaves tendremos claves.
+
+  \subsection{Algoritmos para alcanzar 3FN y FNBC}
+
+  \subsubsection{Algoritmo - 3FN Preservación DFs}
+  Entrada: Un esquema de relación R y un conjunto de DFs que no cumple 3FN.
+  Salida: Una descomposición $\rho$ en 3FN de R que preserva DFs.
+
+  \begin{enumerate}
+    \item Encontrar un cubrimento minimal G para F.
+    \item Genero un esquema por cada DF, es decir combino los atributos y creo un subesquema.
+    \item Si tengo algún atributo de R que no está en ninguna DF creo un esquema a parte con ese atributo.
+  \end{enumerate}
+
+
+  \subsubsection{3FN JSP y Preservación de Dependencias}
+  Este algoritmo sigue los pasos del algoritmo de Preservación de DFs pero agrega un paso que es que si alguna de las claves candidatas no
+  aparece en ningún subesquema creo un subesquema que contenga dicha clave y con eso además garantizamos la propiedad join sin pérdida.
+
+  Pasos:
+  \begin{enumerate}
+    \item Determino las claves candidatas.
+    \item Genero un esquema por cada DF.
+    \item Agrego una clave si no la hay.
+    \item Elimino $R_{i}$ redundantes.
+  \end{enumerate}
+
+  \subsubsection{FNBC y JSP}
+  En este algoritmo se debe comenzar con una forma normal que yo sepa que no está en FNBC. Este algoritmo va contruyendo un arbol en donde
+  la hoja está compuesta por el esquema de relación R y un conjunto de DFs F que se proyectan sobre R y las clave de dicho esquema.
+  
+  Pasos:
+  \begin{enumerate}
+    \item Elegir una dependencia funcional del nodo raíz que no esté en FNBC y creo una nueva hoja la cual tiene como $R_{i}$ a todos los
+      atributos que componen la DF elegida y luego se busca la clave de este nuevo subesquema.
+    \item Despues de generar el primer nodo crea otra rama con un segundo nodo que tiene todo lo que tiene el nodo raiz anterior menos el
+      lado derecho de la DF que acabo de sacar en el paso anterior. Una vez hecho eso se debe ver que dependencias funcionales del nuevo
+      nodo se proyectan en F. Es decir que nuevas DFs se proyectan en F luego de haber quitado el lado derecho de la dependencia funcional
+      separada en el primer paso.
+    \item Repetimos los pasos anteriores hasta que no se pueda quitar más dependencias.
+    \item Este algoritmo nos asegura la propiedad JSP pero no asegura preservación de DF. Para eso necesitamos verificar eso a parte
+      utilizando el algoritmo de $R_{i}$ operación o calculado la clausura.
+    \item Como resultado obtenemos una nueva descomposición, dicha descomposición no asegura preservación de DF entonces debemos verificar
+      esto utilizando el algoritmo $R_{i}$ operación o calculando la clausura sobre las DFs de los nuevos subesquemas.
+  \end{enumerate}
+
+  \section{Resumen}
+  \noindent La FNBC es la FN más alta
+  \begin{itemize}
+    \item Permite eliminar el mayor número de redundancias posibles.
+    \item Es posible alcanzar una descomposición JSP.
+    \item No siempre se logra preservar dependencias.
+  \end{itemize}
+  La 3FN
+  \begin{itemize}
+    \item Permite alcanzar una descomposición JSP.
+    \item Se logra preservar dependencias.
+    \item Pueden existir dependencias transitivas de atributos primos.
+  \end{itemize}
+  Cuando no podemos alcanzar una descomposición FNBC-JSP-PD, podemos aceptar una descomposición 3FN-JSP-PD.
