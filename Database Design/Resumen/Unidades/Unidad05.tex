@@ -1,0 +1,86 @@
+\section{Calidad de Datos}
+Hemos visto varios mecanismos para asegurar calidad de los datos en nuestra base de datos, tales como brindar una semantica precisa definir
+dependencias funcionales para mantener integridad referencial, distintas formas normales que nos ayudan a tratar redundancia y anomalía de
+datos manejo de valores nulos y evitar la generación de datos falsos evitando perder dependencias al momento de realizar una descomposición.
+Pero en este caso nos referimos a la \textbf{Calidad de los datos} como la calidad de los valores de los datos, es decir que tan util es un
+dato para nuestro sistema o dominio. El concepto es relativo por que un dato que necesita ser utilizado de una determinada manera en un
+dominio y ese dato no necesita ser utilizado de la misma manera en otro dominio.
+Es como analizar el data en cuanto a como y para que se va a utilizar el dato de forma tal que uno diga bueno si el dato es usado y usado de
+tal manera así tiene que ser guardado ese dato. Entonces yo me garantizo que ese dato como conozco como va a ser utilizado voy a hacer todo
+lo posible para que este almacenado de esa manera.
+Es relativo por que un dato que necesita ser de una manera en una base de datos no necesita ser usado de la misma forma en otra base de
+datos. Por ejemplo direccion un dominio solo basta con guardad el nombre de la ciudad por ejemplo Cipolletti y en otro domino debemos
+guardar más detalles Río Neuquén 62, Cipolletti.
+
+Definición: La calidad de los datos es la capacidad de los datos de cumplir con su propósito en un determinado contexto. Se puede resumir
+como \textbf{capacidad de uso}.
+
+\subsection{Reglas Basadas en el Uso de Datos}
+\begin{enumerate}
+  \item Los datos que no son usados no se mantienen correctos por mucho tiempo. Por ejemplo en un sistema para administrar pago de servicios
+    el email es un dato muy importante ya que por este medio se envía la factura de dicho servicio por lo tanto al tener un uso frecuente
+    ese dato se mantiene correcto. En cambio un sistema que solo utilice el mail en casos particular puede ser que al momento de utilizarlo
+    ese dato esté desactualizado.
+  \item La calidad de los datos de un sistema está en función de su uso, no de su obtención. Esto quiere decir que podemos obtener mucha
+    información de una forma eficiente y rápida pero esa información puede no ser utilizada por completo o directamente no ser utilizada por
+    lo cual dicha información pierde valor.
+    \item La calidad de los datos no será mejor que su uso más riguroso. La calidad del dato está dada por el uso del dato, si el dato es
+      usuado muy frecuentemente va a tener una calidad alta.
+    \item La calidad del datos tiende a volverse peor con el paso del tiempo.
+    \item La baja probabilidad de que un dato cambie repercutira en su calidad. Si no tenemos mecanismos que nos permitan mantener
+      actualizado dicho dato su calidad ira disminuyendo.
+    \item Las reglas de calidad de datos se aplican tanto a los datos como a los metadatos (datos sobre los datos).
+\end{enumerate}
+
+\subsection{Programa de Calidad Basado en el Uso}
+Cuando tenemos una base de datos funcionando podemos aplicar este programa para mejorar la calidad de los datos de nuestra base de datos.
+
+\begin{enumerate}
+  \item \textbf{Auditar}: Debo preguntarme como de buenas son los datos de la BD hoy. Algunas de estas preguntas pueden ser que datos nos
+    interesan, quien usa los datos, con que proposito son utilizados, se usan actualmente, que tan actuales son, que tan utiles son.
+  \item \textbf{Rediseñar}: Identifico areas de datos críticas, consultar a usuarios si utilizan dichos datos críticos. Los datos se usan no
+    se usan, verificar el por que de la existencia en caso de haber datos nulos, por que son nulos. Compartir los datos con más usuarios
+    siempre teniendo presente la seguridad del sistema. Desarrollar metadatos para datos nulos o con poca calidad.
+  \item \textbf{Entrenar}: Comunicar a las personas que utilizan la base de datos la importancia de la calidad de datos y llevar a cabo
+    planes de entrenamiento y educación para mejorar la calidad de dichos datos y deben preguntarse para que se van a utilizar esos datos
+    para así poder entender lo importancia de que un dato se cargue correctamente.
+  \item \textbf{Medir}: Medir constantemente la calidad de los datos por medio de técnicas automatizadas y verificar la veracidad de los
+    datos es decir verificar si tienen sentido en la realidad o dicho de otra forma auditar fisicamente. Esto debe hacerse con cierta
+    recurrencia para mantener la base de datos en un estado optimo la mayor parte del tiempo posible.
+\end{enumerate}
+
+Fomentar el Dato
+Esto es muy importante para la calidad de los datos ya que utilizar los datos que tenemos almacenados en la DB es la mejor forma de
+mantenerlos con calidad esto además nos ayuda a identificar quienes son los que usan esos datos, que uso se les da a los datos y por cada
+dato podemos evaluar su calidad a partir de distintas dimensiones.
+
+\subsection{Dimensiones de Calidad}
+Son atributos de calidad deseables para los datos, cada dimensión captura un aspecto especifico incluido dentro de los requerimientos de
+calidad de datos. La calidad de datos puede ser vista como multidimensional es decir definido mediante las distintas dimensiones.
+
+\begin{itemize}
+  \item Exactitud: Mide el nivel de correspondencia entre el dato y la vida real. Es decir si los datos representan exactamente la realidad.
+    Por ejemplo: Un dato de inventario nos indica que en el deposito hay tres celulares, en el momento que vayamos al deposito y revisemos
+    debemos encontrar los tres celulares que indica el dato.
+  \item Exactitud Sintactica: Es la cercanía del valor del dato con los elementos del dominio en el cual está definido.
+  \item Exactitud Semántica: Es la cercanía del valor del dato con su valor real. Por ejemplo si tenemos la pelicula Casablanca podemos
+    tener un atributo director con valor Martinez es sintacticamente correcto pero no es Martinez el director de la película Casablanca.
+  \item Completitud: Es un aspecto en el cual debemos saber que cantidad de información es necesaria en el dato para considerarla completa.
+    Es decir poder responder a la pregunta Todos los datos necesarios están presentes? Por ejemplo: Para un dominio la dirección puede ser
+    considerarse un dato completo que solo tenga el nombre de la ciudad donde vive una persona pero la dirección de un dominio de ventas es
+    probable que el atributo direccion necesite de más datos es decir ciudad, provincia, altura, cp, etc. La completitud depende mucho del
+    contexto en el cual se va a utilizar un dato. Si hablamos de completitud en el caso de los nulos también es una cuestion que tiene que
+    ver con el contexto por ejemplo: En un tabla que almacena personas para un atributo dirección si tiene el valor null no sabemos si fue
+    un error o si esa persona no tiene un lugar donde vivir, en cambio si en un atributo email tenemos el valor null, podemos considerarlo
+    completo ya que puede pasar que una persona no tenga correo electrónico.
+  \item Consistencia: Este aspecto se refiere a consistencia y comprensión de los datos. Por ejemplo: Si queremos guardar el género de una
+    persona y en una tupla el campo dice hombre, pero en otro dice M se puede confundir con M de masculino o M de mujer. Por eso se necesita
+    consistencia al cargar datos en el sistema para esto se pueden definir protocolos que deban cumplir las personas encargadas de cargar
+    datos. Puede haber casos con multiples atributos como puede ser el caso de las fechas por ejemplo un error seria tener la fecha de
+    nacimiento de una persona sea menor a la fecha de ingreso a un trabajo.
+  \item Actualidad: Con que frecuencia se actualizan los datos. Por ejemplo la dirección de una persona.
+  \item Volatibilidad: Frecuencia con la que el dato se mantiene válido. Por ejemplo: fecha de nacimiento vs stock de productos.
+  \item Temporalidad: Cuan actuales son los datos para realizar una tarea. Pueden ser utiles pero no estar disponibles cuando se necesitan.
+    Por ejemplo: Si publican el 21 de febrero que la fecha del parcial es el 20 de febrero.  En este caso el dato es util pero no está
+    disponible cuando se necesita.
+\end{itemize}
