@@ -119,7 +119,154 @@ son.
     Manipulación de Datos (DML).
 \end{itemize}
 
-% TODO Copiar la tabla de correspondencia en MER y UML
+% TODO Copiar la tabla de correspondencia en MER y UML setear encabeza en el centro y contenido alineado a la izquierda
+\subsubsection{Comparación MER - UML}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|} % Bordes en todas las celdas
+        \hline
+        MER & UML \\ 
+        \hline
+        Entidad & Clase \\ 
+        \hline
+        Atributo & Atributo \\ 
+        \hline
+        Relación Binaria    & Asociación \\ 
+        \hline
+        Relación con atributos & Clase asociación \\ 
+        \hline
+        Generalización/Especialización & Superclase/SubclaseDato \\ 
+        \hline
+        Relación N-aria & Clase separada \\ 
+        \hline
+    \end{tabular}
+\end{table}
 
 \subsection{Bases de Datos Objeto-Relacionales}
-\subsection{Mapeo Objeto-Relacional}
+Al no tener las bases de datos orientadas a objetos demasiada demanda, surgieron como alternativa las bases de datos objeto-relacionales a
+estas bases de datos se le agregan algunas características más interesantes y más complejas como:
+\begin{itemize}
+  \item \textbf{Constructores de tipos}
+  \item \textbf{Identidad de Objetos}: A través del uso de referncias de tipos.
+  \item \textbf{Herencia}: A traves de la palabra UNDER/OF.
+  \item \textbf{Objetos Complejos}: Los dominios de los atributos pueden ser atomicos o de relación.
+\end{itemize}
+
+\subsubsection{Constructores de Tipos}
+Para especificar estructuras de objetos complejos se utilizan los user-defined types (UDTs) y a su vez poder separar la declaracion de tipos
+de la creación de una tabla. En cuanto a los tipos acepta tipos primitivos y además utilizar atributos que sean estructuras de datos como
+list, set, setlist, etc. Al permitir que un atributo sea una estrucutra de datos ya perdemos la propiedad de atomicidad en dichos atributos
+ya que pueden tener más de un valor. \\
+
+\begin{lstlisting}[language=OQL]
+CREATE TYPE tipo_telefonos AS(
+  notipo VARCHAR(5),
+  codigo_area INTEGER,
+  numero VARCHAR(10) 
+);
+\end{lstlisting}
+
+\begin{lstlisting}[language=OQL]
+CREATE TYPE tipo_persona AS(
+  dni VARCHAR(20),
+  nombre VARCHAR(20),
+  apellido VARCHAR(20),
+  fecha_nacimiento DATE,
+  telefonos tipo_telefonos ARRAY[4],
+)
+\end{lstlisting}
+
+\subsubsection{Identidad de Objetos}
+\noindent Los OID pueden crearse por medio de tipos de referencia se utilizan para tipos o tablas luego de la creación (de tipos o tablas). \\
+
+\begin{lstlisting}[language=OQL]
+REF IS <atributo OID> <metodo de generación>
+\end{lstlisting}
+
+\noindent La siguiente sentencia indica que si una nueva tipo\_persona es creada el sistema le asignara un OID.
+
+\begin{lstlisting}[language=OQL]
+CREATE TABLE Persona OF tipo_persona REF IS id_persona SYSTEM GENERATED
+\end{lstlisting}
+
+\noindent La siguiente sentencia indica que si una nueva tipo\_persona es creada se utilizar el sistema tradicional de clave primaria
+provista por el usuario.
+
+\begin{lstlisting}[language=OQL]
+CREATE TABLE Persona OF tipo_persona(
+  REF IS id_persona DERIVED;
+  PRIMARY KEY (dni);
+)
+\end{lstlisting}
+
+\subsubsection{Herencia}
+En los paradigmas orientados a objetos existe la herencia, en este caso tenemos dos tipos de herencia, herencia de tipos que permite heredar
+los atributos de un tipo definido. Los tipos que heredan los atributos se definen con la palabra \textbf{under} y son considerados subtipos
+mientras que el tipo del cual heredan los atributos se lo considera supertipo.
+
+\begin{lstlisting}[language=OQL]
+CREATE TYPE tipo_persona AS(
+  dni VARCHAR(20),
+  nombre VARCHAR(20),
+  apellido VARCHAR(20),
+  fecha_nacimiento DATE,
+  telefonos tipo_telefonos ARRAY[4],
+)
+\end{lstlisting}
+
+\begin{lstlisting}[language=OQL]
+CREATE TYPE estudiante UNDER tipo_persona(
+  curso VARCHAR(20),
+  dpto VARCHAR(20)
+)
+\end{lstlisting}
+
+\begin{lstlisting}[language=OQL]
+CREATE TYPE profesor UNDER tipo_persona(
+  sueldo INTEGER
+)
+\end{lstlisting}
+
+Por otro lado tenemos la herencia de tablas (OF) que se corresponde con la generalización/especialización utilizado en el modelo relacional.
+Para ilustrar esto concepto usamos el siguiente ejemplo creamos una tabla gente de tipo tipo\_persona y creamos la tabla estudiante de tipo
+estudiante y la tabla profesor de tipo profesor. Las tablas estudiante y profesor las definimos como subtablas de la tabla Gente. Esto
+herencia la momento de insertar una tupla en estudiante o en profesor dicha tupla también estara presente en la tabla gente. Funciona como
+una especialización total y dijunta.
+
+\subsubsection{Objetos Complejos}
+Se soportan dos tipos nuevos arrays y multiset ambos pueden ser de cualquier tipo VARCHAR, INTEGER, etc o del tipo de otra tabla.
+\begin{itemize}
+  \item \textbf{Array}: Es una colección ordenada de elementos del mismo tipo. Se accede como array[i].
+  \item \textbf{Multiset}: Es una colección no ordenada de elementos del mismo tipo que pueden ocurrir muchas veces.
+  \item \textbf{Referencia}: Hace referencia a otra tabla. Puede ser una referencia a un array o multiset que contenga referencias a otras
+    tablas existentes (relaciones anidadas).
+\end{itemize}
+
+Al tener relaciones que poseen atributos que son arreglos o conjuntos ya no soportan 1FN ya que se pierde la propiedad de atomicidad. Esto
+no quiere decir que todas las aplicaciones se modelan mejor mediante relaciones en 1FN. Por ejemplo los atributos multievaluados es mejor
+modelarlos utilizando objetos complejos ya que evitamos crear tablas adicionales y por lo tanto hacer joins adicionales. Las relaciones
+anidadas se navegan entre clases de una forma distinta a los joins.
+
+Para realizar consultas sobre los MOR (Modelo Objeto-relacional) se utilizan nuevos operadores que son unnest y collect. Con unnest podemos
+acceder a los elementos de las colecciones y/o listarlos de forma tabular. El collect es la inversa del unnest donde se puede transformar
+aalgo tabular en 1FN en una colección.
+
+% TODO copiar ejemplas de las transparencias, ejemplos para acceder a colecciones de referencias, etc.
+\subsection{Mapeo Objeto-Relacional - ORM}
+Es el tercer enfoque para integrar POO con bases de datos. Es una capa que se construye sobre el modelo relacional, el programador define un
+mapeo entre las tuplas del modelo relacional y los objetos de un lenguaje OO con la diferencia de que aquí los objetos son transitorios y no
+hay una identidad de objeto permanente. Esti permite a los programadores construir aplicaciones usando el modelo orientado a objetos
+mientras que se utiliza una base de datos relacional para almacenar los datos. Con esto la interacción con la base de datos se realiza
+mediante un lenguaje de programación.
+
+Ventajas:
+Se interactua directamente con los objetos.
+Reduce el tiempo de código.
+Se puede trabajar en memoria.
+Se puede cambiar el SGBD de forma sencilla ya que un orm te abstrae del gestor que se este utilizando para las consultas.
+Se puede trabajar en memoria.
+
+Desventajas
+Toma tiempo aprender a utilizarlo y posteriormente utilizarlo de forma eficiente.
+Se pierde el control de como se trabaja por debajo.
+Los cambios son dificiles de realizar sobre todo una vez que esta funcionando.

@@ -17,7 +17,15 @@
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
 \usepackage{tikz}
 \usepackage{parskip}
-
+\usepackage{listings} 
+% Define OQL as a custom language (if needed)
+\lstdefinelanguage{OQL}{
+    keywords={CREATE TYPE, FROM, WHERE, GROUP, BY, HAVING, ORDER, INSERT, UPDATE, DELETE},
+    sensitive=false, % Case insensitive
+    morecomment=[l]{--}, % Line comment
+    morecomment=[s]{/*}{*/}, % Block comment
+    morestring=[b]", % Strings inside double quotes
+}
 \usetikzlibrary{shapes.geometric, arrows}
 
 % we want ER + above/below + left/right
@@ -29,7 +37,6 @@ centered, draw=black, fill=blue!15]
 
 \title{Resumen de Diseño de Bases de Datos}
 \author{You}
-
 \begin{document}
 \maketitle
 
@@ -37,5 +44,6 @@ centered, draw=black, fill=blue!15]
 \include{Unidades/Unidad02}
 \include{Unidades/Unidad03}
 \include{Unidades/Unidad04}
+\include{Unidades/Unidad05}
 
 \end{document}
