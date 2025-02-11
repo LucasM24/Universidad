@@ -84,3 +84,60 @@ calidad de datos. La calidad de datos puede ser vista como multidimensional es d
     Por ejemplo: Si publican el 21 de febrero que la fecha del parcial es el 20 de febrero.  En este caso el dato es util pero no está
     disponible cuando se necesita.
 \end{itemize}
+
+\subsection{La Base de Datos Como un Lago}
+Veamos la analogía de una base de datos como una lago podemos establecer las siguientes correspondencias:
+\begin{itemize}
+  \item Agua del lago = Datos.
+  \item Ríos = Cadenas de información que crean los datos.
+  \item Fábricas = Fuentes de contaminación.
+  \item Personas tomando agua = Consumidor de los datos.
+\end{itemize}
+
+\noindent Ante la contaminación del lago podemos:
+\begin{enumerate}
+  \item No hacer nada y tratar a las personas afectadas por tomar el agua del lago.
+  \item Filtrar el agua del lago, eliminar las fuentes de contaminación y poner el agua en el lago.
+  \item Filtrar pequeñas cantidades de agua cada día. Por ejemplo filtrar el agua de los ríos antes de que entre el agua al lago o filtrar el
+    agua antes de su consumo.
+  \item Identificar las fuentes de contaminación y eliminarlas (o al menos mitigarlas).
+\end{enumerate}
+
+\noindent Del mismo modo, frente a una base de datos contaminada (pobre calidad de datos) tenemos las mismas cuatro opciones:
+\begin{enumerate}
+  \item Tratar con los impactos  que generan los datos erroneos, lo cual puede derivar en tomar malas decisiones corregir y/o calmar
+    clientes enojados. Por ejemplo: Devolver el dinero a un cliente.
+  \item Realizar una limpieza general de toda la base de datos, lo cual es bastante costoso. Comparar con otras bases de datos para buscar
+    diferencias y ejecutar pruebas automatizadas para identificar datos que no se ajustan a las reglas de negocio.
+  \item Realizar pequeñas limpiezas de la base de datos periodicamente. Podemos limpiar los datos a la entrada de una base de datos o antes
+    de usarlos.
+  \item Encontrar las fuentes erroneas en los procesos de la organización que hacen que nuestros datos se contaminen.
+\end{enumerate}
+
+Enfrentarse a la realidad:
+Podemos ver las opciones anteriores como distintos programas para enfrentar la calidad de los datos.
+
+\begin{itemize}
+  \item Una organización que no hace nada ante la mala calidad de datos está eligiendo la opción uno.
+  \item La opción dos es la que se utiliza más frecuentemente. Ya que existe un gran número de herramientas informáticas que permiten
+    automatizar la corrección de errores. Para luego corregir dichos errores a traves de la intuición o reglas fijas. El problema de esto
+    es que es una solución a corto plazo ya que no estamos detectando la raíz del problema solo estámos corrigiendo los errores y permitimos
+    que se sigan generando. Es decir la limpieza nunca termina, lo que conlleva mucho tiempo genera más gastos y da una falsa sensación de
+    seguridad.
+  \item Realizar limpiezas periodicamente es lo mismo que la corrección de errores solo que se realiza más frecuentemente por lo tanto
+    conlleva los mismo errores anteriormente mencionados. Solo se corrigen los datos errones generados pero nunca se corrige la raíz del
+    problema es decir lo que está generando esos datos.
+  \item La ultima opción se basa en la prevención ya que identifico la fuente de error de esos datos. Este plan se basa en la detección y
+    corrección es decir en la prevención. Esto nos provee ventajas a largo plaza pero dicho proceso de detección y corrección es más costoso
+    y requiere más tiempo ya que se deben revisar los procesos de la organización y las fuentes de información para buscar una solución y
+    por lo general las empresas están pensando en el día a día.
+\end{itemize}
+
+
+Resumen:
+\begin{itemize}
+  \item Una mala calidad de datos puede generar el fracaso total de la utilidad de una base de datos.
+  \item Los datos son medidos y evaluados de acuerdo al uso de los mismos.
+  \item La calidad de los datos es un concepto multidimensional.
+  \item Hay diferentes enfoques para enfrentar la calidad de datos. Detección y corrección vs prevención.
+\end{itemize}
