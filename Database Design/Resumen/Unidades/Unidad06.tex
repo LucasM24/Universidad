@@ -1,0 +1,188 @@
+\section{Mineria de Datos}
+La minería de datos analiza datos almacenados en disco, si el volumen
+de datos es muy grande se le da el nombre de Big Data las cuales son
+grandes bases de datos. La minería de datos  extrae patrones o
+información interesante (no trivial, implícita, previamente
+desconocida y potencialmente util) de dichos datos.
+Es importante marcar que realizar una consulta a la base de datos no
+es lo mismo que realizar un trabajo de minería de datos. Al hacer una
+consulta pedimos datos y una vez están disponibles los analizamos y
+los utilizamos para las tareas que necesitemos. Por ejemplo: Si
+necesitamos saber que ciudad registró mayor producción de manzanas
+entre Cipolletti o Neuquén podemos realizar una consulta pidiendo los
+datos de produccíon de manzana de las dos ciudades y comparar los
+resultados y después puedo hacer suposiciones de por que hubo mayor
+produccíon en una ciudad que en otra. En cambio con respecto a esa
+pregunta las herramientas de minería van a tratar de determinar el
+porque sucedio esto y no solo con los datos de la produccíon sino por
+ejemplo con los datos climáticos, datos relacionados con el
+mantenimiento de las plantas, etc. Entonces la minería no realiza
+suposiciones sino que trata de descubrir relaciones y patrones
+escondidos que no son siempre obvios.
+
+% Página 1066 Fundamentals of database system
+\subsection{Objetivos}
+La minería de datos se lleva a cabo para alcanzar alguna meta o
+utilizarla en ciertas aplicaciónes. En términos generales estos
+objetivos entran en alguna de las siguiente clases:
+\subsubsection{Predicción}
+La minería de datos puede mostrar como ciertos atributos dentro de
+los datos se comportaran en el futuro. Un ejemplo de minería de datos
+predictiva puede ser analizar las transacciones de compras para
+predecir que consumidores compraron si aplicamos ciertos descuentos,
+cuanto volumen de venta generará una tienda en un cierto período y si
+borrar una linea de productos dará más beneficios. En tales
+aplicaciones la lógica de negocio se utiliza en conjunto con la
+minería de datos. En un contexto científico ciertas ondas sísimicas
+pueden predecir un terremoto con una alta probabilidad.
+\subsubsection{Identificación}
+Los patrones de datos pueden ser usados para identificar un item, un
+evento o una actividad. Por ejemplo, intrusos intentando entrar en un
+sistema informático pueden ser identificados por los programas
+executados, archivos accedidos o tiempo de uso de la CPU por sesión.
+\subsubsection{Clasificación}
+La minería de datos puede particionar los datos en diferentes clases
+o categorías basandose en una combinación de parámetros. Por ejemplo
+los clientes de un supermercado pueden ser clasificados como
+compradores de descuentos, rápidos, leales, leales a una marca o poco
+frecuentes. Esta clasificación puede usarse en diferentes análisis de
+transacciones de compra de clientes como actividad posterior a la
+minería. 
+\subsubsection{Optimización}
+Un objetivo eventual de la minería de datos puede ser optimizar el
+uso de recursos limitados como el tiempo, espacio, dinero o
+materiales y con esto maximizar variables de salida como los
+beneficios o ventas bajo un conjunto de restricciones. Este objetivo
+se asemeja al función operación utilizada en problemas de
+investigación que tratan con optimización bajo ciertas condiciones.
+
+\subsection{Enfoques}
+hola
+
+% Doy ejemplos de tuplas con valores
+\subsubsection{Aprendizaje Supervisado}
+Los algoritmos de aprendizaje supervisado basan su aprendizaje en un
+juego de datos de entrenamiento previamente etiquetados. Por
+etiquetado entendemos que para cada ocurrencia del juego de datos de
+entrenamiento conocemos el valor de su atributo objetivo. Esto le
+permitirá al algoritmo poder “aprender” una función capaz de predecir
+el atributo objetivo para un juego de datos nuevo.
+
+Por ejemplo, una empresa de telecomunicaciones quiere entender por que
+posee clientes leales y otros que no lo son. Entonces quiere predecir
+que clientes no son leales y se iran con la competencia. Con esto en
+mente el analista puede crear un modelo derivado de datos historicos
+de sus clientes leales con aquellos que los han dejado dichos
+datos seran etiquetados siguiendo un criterio como leales y no
+leales. Una vez entrenado el modelo, utilizando un nuevo conjunto de
+datos, será capas de predecir que clientes pueden cambiar de compañia,
+es decir no son leales y cuales leales.
+
+\subsubsection{Aprendizaje no Supervisado}
+Los métodos no supervisados son algoritmos que basan su proceso de
+entrenamiento en un conjunto de datos sin etiquetas o clases
+previamente definidas. Es decir, a priori no se conoce ningún valor
+objetivo o de clase, ya sea categórico o numérico. El aprendizaje no
+supervisado está dedicado a las tareas de agrupamiento, también
+llamadas clustering donde su objetivo es encontrar grupos similares
+en el conjunto de datos. Por ejemplo, un grupo de vendedores quiere
+conocer las similitudes que existen entre sus clientes para poder
+crear y entender diferentes grupos de ventas y mercado. Puede haber
+cliente sin hijos, clientes con ingresos bajos, clientes con más de
+dos hijos, etc. Esto podría darnos por ejemplo 3 grupos:
+\begin{itemize}
+  \item Grupo 1, ingresos: Bajos, hijos: 1, auto: Lujoso.
+  \item Grupo 2, ingresos: Bajos, hijos: 0, auto: Compacto.
+  \item Grupo 3, ingresos: Medios, hijos: 2, auto: Sedán.
+\end{itemize}
+
+% Página 1089 Database Systems
+\subsection{¿Por Qué Usar Minería de Datos?}
+La minería de datos puede ser aplicada a una gran variedad de
+contextos a la hora de la toma de decisiones en una organización.
+
+\subsubsection{Marketing}
+Se utiliza para analizar patrones en las compras de los consumidores.
+Se pueden determinar varias estrategias de marketing como publicidad,
+mails localizados, diseño de catalogos, distribución de sucursales,
+etc. Por ejemplo vendedores por correo electronico pueden utilizar la
+minería de datos para enviar mails a personas que puedan convertirse
+en potenciales clientes en lugar de enviar correo a una lista de
+millones de clientes.
+
+\subsubsection{Análisis de Tendencias}
+Entender las tendencias del mercado es util para reducir costos y
+tiempo, en entidades financieras es bueno saber la forma en que los
+clientes efectuan retiros y depósitos. Las cadenas de supermercado
+utilizan minería de datos para analizar las tendencias del mercado y
+ofrecer productos y promociones acorde a dichas tendencias.
+
+\subsubsection{Detección de Fraudes}
+Con técnicas de minería de datos podemos modelar cuales demandas de
+seguro, llamadas telefónicas o compras con tarjeta de crédito es
+probable que sean fraudulentas. Muchas organizaciones que
+proporcionan tarjetas de crédito utilizan minería de datos para
+modelar y entender los fraudes con tarjetas de crédito.
+
+\subsection{El Proceso Para Minería de Datos}
+\subsubsection{Preparación de los Datos}
+Es el corazón de la minería de datos. Si los datos utilizados en un
+estudio de minería de datos son de mala calidad los patrones que
+obtenga de esos datos van a ser de mala calidad. Por lo tanto antes
+de comenzar a entrenar el modelo debemos limpiar los datos es decir
+verificar si cumplen con exactitud semántica, sintáctica,
+completitud, si tengo valores nulos, etc. Además puede ser que haya
+que normalizar datos para ajustarlos al estudio que se va a realizar
+.
+\subsubsection{Definición de un Estudio}
+Todo proceso de minería de dato debe tener un objetivo o una
+aplicación una vez encontrado el objetivo. Debemos elegir el método
+de minería de datos utilizado es decir utilizar un aprendizaje
+supervisado o no supervisado. Además no vamos a utilizar todo el
+conjunto de datos para realizar el estudio lo que debemos hacer tomar
+una muestra representativa para el estudio esto no es facil ya que
+dicha muestra debe representar a todo el conjunto de datos.
+
+\subsubsection{Lectura de Datos y Construcción del Modelo}
+Una vez definido el estudio un software de minería de datos lee los
+datos y construye un modelo. El modelo resume grandes cantidades de
+datos en indicadores, algunos indicadores son:
+\begin{itemize}
+  \item Frecuencias: Muestran como ocurre cierto valor. Por ejemplo,
+    el 40$\%$ de los clientes que dejan la compañia tienen un valor
+    bajo en el indicador de estado.
+  \item Pesos: Como algunas entradas son más válidas que otras.
+    Podemos llegar a la conclusión de que el valor Bajo en el campo
+    indicador\_de\_estado tiene un alto peso o impacto en los
+    clientes perdidos.
+  \item Conjunciones: Muchas veces algunas entradas tienen más peso
+    juntas que separadas. Por ejemplo puede no ser cierto que el sexo
+    másculino es más leal, pero si que las personas de sexo masculino
+    que tienen mascotas y les guste esquiar si sean más leales.
+  \item Diferenciación: Cuanto más es más importante una variable a
+    otra. Por ejemplo: Quiero saber que jugadores de hockey son más
+    probables que compren sus productos, pero si los jugadores están
+    más predispuestos a comprar a su competidor lo más probable es
+    que no se use este hecho.
+  \item Ruido: Los modelos construidos muchas veces serán imperfectos
+    debido a anomalías encontradas en los conjuntos de datos. Por
+    ejemplo valores extraordinarios que se alejan de los valores
+    normales. Existen filtros para disminuir el impacto del ruido en
+    los conjuntos de datos y mejorar la correctitud del modelo.
+    Muchos modelos possen topes que limitan la cantidad de ruido en
+    ellos.
+\end{itemize}
+
+\subsection{Comprensión del Model}
+\subsection{Mineria de Datos Aplicada a la Web}
+
+\subsubsection{Web Content Mining}
+Se trata de extraer del contenido de los documentos de la web. Se
+puede clasificar en text minning para documentos planos, hypertext
+mining si los documentos tienen enlaces a otros documentos o a si
+mismo.
+\subsubsection{Web Structure Mining}
+Se intenta descubrir un modelo a partir de la topología de enlaces de
+la red. Este modelo puede ser util para clasificar o agrupar
+documentos.
+\subsubsection{Web Usage Mining}
