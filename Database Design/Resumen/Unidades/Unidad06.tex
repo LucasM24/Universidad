@@ -1,24 +1,18 @@
-\section{Mineria de Datos}
-La minería de datos analiza datos almacenados en disco, si el volumen
-de datos es muy grande se le da el nombre de Big Data las cuales son
-grandes bases de datos. La minería de datos  extrae patrones o
+\section{Unidad 06 - Mineria de Datos}
+La minería de datos analiza datos y extrae patrones o
 información interesante (no trivial, implícita, previamente
-desconocida y potencialmente util) de dichos datos.
+desconocida y potencialmente util) de dichos datos, la
+minería no realiza suposiciones sino que trata de descubrir
+relaciones y patrones escondidos que no son siempre obvios.
+
 Es importante marcar que realizar una consulta a la base de datos no
 es lo mismo que realizar un trabajo de minería de datos. Al hacer una
 consulta pedimos datos y una vez están disponibles los analizamos y
-los utilizamos para las tareas que necesitemos. Por ejemplo: Si
-necesitamos saber que ciudad registró mayor producción de manzanas
-entre Cipolletti o Neuquén podemos realizar una consulta pidiendo los
-datos de produccíon de manzana de las dos ciudades y comparar los
-resultados y después puedo hacer suposiciones de por que hubo mayor
-produccíon en una ciudad que en otra. En cambio con respecto a esa
-pregunta las herramientas de minería van a tratar de determinar el
-porque sucedio esto y no solo con los datos de la produccíon sino por
-ejemplo con los datos climáticos, datos relacionados con el
-mantenimiento de las plantas, etc. Entonces la minería no realiza
-suposiciones sino que trata de descubrir relaciones y patrones
-escondidos que no son siempre obvios.
+los utilizamos para las tareas que necesitemos. En cambio las
+herramientas de minería van a tratar de determinar el porque sucedio
+esto y no solo con los datos de la produccíon sino por ejemplo con
+los datos climáticos, datos relacionados con el mantenimiento de las
+plantas, etc. 
 
 % Página 1066 Fundamentals of database system
 \subsection{Objetivos}
@@ -62,9 +56,9 @@ hola
 % Doy ejemplos de tuplas con valores
 \subsubsection{Aprendizaje Supervisado}
 Los algoritmos de aprendizaje supervisado basan su aprendizaje en un
-juego de datos de entrenamiento previamente etiquetados. Por
-etiquetado entendemos que para cada ocurrencia del juego de datos de
-entrenamiento conocemos el valor de su atributo objetivo. Esto le
+conjunto de datos de entrenamiento previamente etiquetados. Por
+etiquetado entendemos que para cada ocurrencia del conjunto de datos
+de entrenamiento conocemos el valor de el atributo objetivo. Esto le
 permitirá al algoritmo poder “aprender” una función capaz de predecir
 el atributo objetivo para un juego de datos nuevo.
 
@@ -98,11 +92,11 @@ dos hijos, etc. Esto podría darnos por ejemplo 3 grupos:
 
 % Página 1089 Database Systems
 \subsection{¿Por Qué Usar Minería de Datos?}
-La minería de datos puede ser aplicada a una gran variedad de
-contextos a la hora de la toma de decisiones en una organización.
+La minería de datos puede ser aplicada en distintas áreas dentro de
+una organización.
 
 \subsubsection{Marketing}
-Se utiliza para analizar patrones en las compras de los consumidores.
+Se utiliza para analizar patrones en las compras de los clientes.
 Se pueden determinar varias estrategias de marketing como publicidad,
 mails localizados, diseño de catalogos, distribución de sucursales,
 etc. Por ejemplo vendedores por correo electronico pueden utilizar la
@@ -173,7 +167,7 @@ datos en indicadores, algunos indicadores son:
     ellos.
 \end{itemize}
 
-\subsection{Comprensión del Model}
+\subsection{Compresión del Model}
 \subsection{Mineria de Datos Aplicada a la Web}
 
 \subsubsection{Web Content Mining}
@@ -186,3 +180,7 @@ Se intenta descubrir un modelo a partir de la topología de enlaces de
 la red. Este modelo puede ser util para clasificar o agrupar
 documentos.
 \subsubsection{Web Usage Mining}
+Se intenta extraer información de como el usuario utiliza el sitio
+web (áreas más utilizados, links más utilizados, tiempo de uso del
+sitio) a partir de las sesiones y comportamientos de los usuarios y
+navegantes.

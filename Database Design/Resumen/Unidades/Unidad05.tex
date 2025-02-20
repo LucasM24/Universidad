@@ -1,4 +1,4 @@
-\section{Calidad de Datos}
+\section{Unidad 05 - Calidad de Datos}
 Hemos visto varios mecanismos para asegurar calidad de los datos en nuestra base de datos, tales como brindar una semantica precisa definir
 dependencias funcionales para mantener integridad referencial, distintas formas normales que nos ayudan a tratar redundancia y anomalía de
 datos manejo de valores nulos y evitar la generación de datos falsos evitando perder dependencias al momento de realizar una descomposición.
@@ -36,17 +36,34 @@ como \textbf{capacidad de uso}.
 Cuando tenemos una base de datos funcionando podemos aplicar este programa para mejorar la calidad de los datos de nuestra base de datos.
 
 \begin{enumerate}
-  \item \textbf{Auditar}: Debo preguntarme como de buenas son los datos de la BD hoy. Algunas de estas preguntas pueden ser que datos nos
-    interesan, quien usa los datos, con que proposito son utilizados, se usan actualmente, que tan actuales son, que tan utiles son.
-  \item \textbf{Rediseñar}: Identifico areas de datos críticas, consultar a usuarios si utilizan dichos datos críticos. Los datos se usan no
-    se usan, verificar el por que de la existencia en caso de haber datos nulos, por que son nulos. Compartir los datos con más usuarios
-    siempre teniendo presente la seguridad del sistema. Desarrollar metadatos para datos nulos o con poca calidad.
-  \item \textbf{Entrenar}: Comunicar a las personas que utilizan la base de datos la importancia de la calidad de datos y llevar a cabo
-    planes de entrenamiento y educación para mejorar la calidad de dichos datos y deben preguntarse para que se van a utilizar esos datos
-    para así poder entender lo importancia de que un dato se cargue correctamente.
-  \item \textbf{Medir}: Medir constantemente la calidad de los datos por medio de técnicas automatizadas y verificar la veracidad de los
-    datos es decir verificar si tienen sentido en la realidad o dicho de otra forma auditar fisicamente. Esto debe hacerse con cierta
-    recurrencia para mantener la base de datos en un estado optimo la mayor parte del tiempo posible.
+  \item \textbf{Auditar}: Se debe revisar los datos que hay en la BD
+    actualmente y comenzar a hacer preguntas sobre los datos. ¿Qué
+    datos nos interesan?, ¿Quien usa los datos?, ¿Para que se
+    utilizan?, ¿Se usan actualmente?, ¿Qué tan actuales son?, etc. A
+    partir de preguntas como estas podemos auditar la calidad de los
+    datos que disponemos actualmente.
+  \item \textbf{Rediseñar}: Identificar áreas de datos criticos en el
+    sistema, verificar si existen nulos entre esos datos, consultar a
+    los usuarios si dichos datos son útiles o están siendo
+    utilizados. A partir de esto podemos rediseñar dichas areas para
+    que más usuarios puedan utilizar dichos datos críticos con el fín
+    de mantener su calidad y lograr que sean utilizados
+    frecuentemente, averiguar la razón de los datos nulos y prevenir
+    que se sigan generando buscando la raíz del problema y planteando
+    una solución, desarrollar metadatos para datos nulos o datos con
+    poca calidad. Todo esto siempre teniendo presente la seguridad de
+    los datos y del sistema.
+  \item \textbf{Entrenar}: Comunicar a las personas que utilizan la
+    base de datos, la importancia de la calidad de datos y llevar a
+    cabo planes de entrenamiento y educación para mejorarla.
+    Plantear a los usuario la pregunta ¿para qué se van a utilizar
+    los datos? ayudará a comprender la importancia de cargar un dato
+    correctamente.
+  \item \textbf{Medir}: Medir constantemente la calidad de los datos
+    por medio de técnicas automatizadas y verificar su exactitud
+    semántica. Esto debe realizarse con cierta recurrencia para
+    mantener la base de datos en un estado optimo la mayor parte del
+    tiempo posible.
 \end{enumerate}
 
 Fomentar el Dato
@@ -59,30 +76,51 @@ Son atributos de calidad deseables para los datos, cada dimensión captura un as
 calidad de datos. La calidad de datos puede ser vista como multidimensional es decir definido mediante las distintas dimensiones.
 
 \begin{itemize}
-  \item Exactitud: Mide el nivel de correspondencia entre el dato y la vida real. Es decir si los datos representan exactamente la realidad.
-    Por ejemplo: Un dato de inventario nos indica que en el deposito hay tres celulares, en el momento que vayamos al deposito y revisemos
-    debemos encontrar los tres celulares que indica el dato.
-  \item Exactitud Sintactica: Es la cercanía del valor del dato con los elementos del dominio en el cual está definido.
-  \item Exactitud Semántica: Es la cercanía del valor del dato con su valor real. Por ejemplo si tenemos la pelicula Casablanca podemos
-    tener un atributo director con valor Martinez es sintacticamente correcto pero no es Martinez el director de la película Casablanca.
-  \item Completitud: Es un aspecto en el cual debemos saber que cantidad de información es necesaria en el dato para considerarla completa.
-    Es decir poder responder a la pregunta Todos los datos necesarios están presentes? Por ejemplo: Para un dominio la dirección puede ser
-    considerarse un dato completo que solo tenga el nombre de la ciudad donde vive una persona pero la dirección de un dominio de ventas es
-    probable que el atributo direccion necesite de más datos es decir ciudad, provincia, altura, cp, etc. La completitud depende mucho del
-    contexto en el cual se va a utilizar un dato. Si hablamos de completitud en el caso de los nulos también es una cuestion que tiene que
-    ver con el contexto por ejemplo: En un tabla que almacena personas para un atributo dirección si tiene el valor null no sabemos si fue
-    un error o si esa persona no tiene un lugar donde vivir, en cambio si en un atributo email tenemos el valor null, podemos considerarlo
-    completo ya que puede pasar que una persona no tenga correo electrónico.
-  \item Consistencia: Este aspecto se refiere a consistencia y comprensión de los datos. Por ejemplo: Si queremos guardar el género de una
-    persona y en una tupla el campo dice hombre, pero en otro dice M se puede confundir con M de masculino o M de mujer. Por eso se necesita
-    consistencia al cargar datos en el sistema para esto se pueden definir protocolos que deban cumplir las personas encargadas de cargar
-    datos. Puede haber casos con multiples atributos como puede ser el caso de las fechas por ejemplo un error seria tener la fecha de
-    nacimiento de una persona sea menor a la fecha de ingreso a un trabajo.
-  \item Actualidad: Con que frecuencia se actualizan los datos. Por ejemplo la dirección de una persona.
-  \item Volatibilidad: Frecuencia con la que el dato se mantiene válido. Por ejemplo: fecha de nacimiento vs stock de productos.
-  \item Temporalidad: Cuan actuales son los datos para realizar una tarea. Pueden ser utiles pero no estar disponibles cuando se necesitan.
-    Por ejemplo: Si publican el 21 de febrero que la fecha del parcial es el 20 de febrero.  En este caso el dato es util pero no está
-    disponible cuando se necesita.
+  \item Exactitud Semántica: Mide el nivel de correspondencia entre
+    el dato y la vida real. Es decir si los datos representan
+    exactamente la realidad. Por ejemplo: Un dato de inventario nos
+    indica que en el deposito hay tres celulares, en el momento que
+    vayamos al deposito y revisemos debemos encontrar los tres
+    celulares que indica el dato.
+  \item Exactitud Sintáctica: Es la cercanía del valor del dato con
+    los elementos del dominio en el cual está definido.
+  \item Completitud: Se refiere a que cantidad de cantidad de
+    información es necesaria en el dato para considerarla completa.
+    Poder responder a la pregunta ¿todos los datos necesarios están
+    presentes? Por ejemplo: Para un dominio la dirección puede
+    considerarse un dato completo utilizando solamente el nombre de
+    la ciudad donde vive una persona pero la dirección de un dominio
+    orientado a ventas a domicilio es probable que el atributo
+    direccion necesite más datos ya que necesita ser más preciso, por
+    ejemplo incluir ciudad, provincia, altura, cp, etc. En el caso de
+    los nulos podemos plantear el siguiente ejemplo: en un tabla que
+    almacena personas para un atributo dirección si tiene el valor
+    null no sabemos si, fue un error, si esa persona no tiene un
+    lugar donde vivir, en cambio si en un atributo email tiene el
+    valor null podemos considerarlo completo ya que puede pasar que
+    una persona no tenga correo electrónico. La completitud está
+    ligada al contexto en el cual se va a utilizar un dato. 
+  \item Consistencia: Este aspecto se refiere a la igualdad entre
+    valores del mismo dato y a su vez esto afecta a la comprensión de
+    dicho dato. Por ejemplo: Si queremos guardar el género de una
+    persona y en una tupla el campo tiene el valor hombre, en otra
+    tupla tiene el valor M esto trae problemas ya que no se sabe si
+    M se refiere a masculino o a mujer. Por esto la consistencia es
+    importanta al momento de cargar datos en el sistema. Una forma de
+    prevenir inconsistencia es definir protocolos que deban cumplir
+    las personas encargadas de cargar datos. Otro caso de
+    inconsistencia puede ser con multiples atributos utilizando
+    fechas, un error sería tener que la fecha de nacimiento de una
+    persona sea menor a la fecha de ingreso a un trabajo.
+  \item Actualidad: Con que frecuencia se actualizan los datos. Por
+    ejemplo la dirección de una persona.
+  \item Volatibilidad: Frecuencia con la que el dato se mantiene
+    válido. Por ejemplo: fecha de nacimiento vs stock de productos.
+  \item Temporalidad: Cuan actuales son los datos para realizar una
+    tarea. Pueden ser utiles pero no estar disponibles cuando se
+    necesitan. Por ejemplo: Si publican el 21 de febrero que la fecha
+    del parcial es el 20 de febrero.  En este caso el dato es util
+    pero no está disponible cuando se necesita.
 \end{itemize}
 
 \subsection{La Base de Datos Como un Lago}

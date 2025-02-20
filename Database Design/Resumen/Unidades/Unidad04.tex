@@ -8,11 +8,16 @@
 \end{enumerate}
 
 \subsection{Bases de Datos Orientadas a Objetos}
-Utilizamos lenguajes de programación orientados a objetos (Java, Smalltalk, etc) extendidos que nos permiten persistir información. La
-información se representa mediante objetos como los presentes en la programación orientada a objetos. Es una buena elección cuando
-necesitamos un buen rendimiento al manipular tipos de datos complejos. Proporcionan costos de desarrolo más bajos ya que al utilizar el
-mismo tanto para programar como para persistir la información es solo cuestion de familiarizarse con funciones que permiten la persistencia.
-Esto ayuda a agilizar el desarrollo y en cierta medida facilitar el mantenimiento tanto para la aplicación como para la base de datos.
+Para persistir información se utiliza lenguajes orientados a objetos
+(Java, Smalltalk, etc) extendidos que nos permiten persistir
+información. La información se representa mediante objetos. Es una
+buena elección cuando necesitamos un buen rendimiento al manipular
+tipos de datos complejos. Proporciona costos de desarrollo más bajos
+ya que al utilizar el mismo lenguaje tanto para programar como para
+persistir la información, es solo cuestion de familiarizarse con
+constructures que habilitan la persistencia.
+Esto ayuda a agilizar el desarrollo y en cierta medida facilitar el
+mantenimiento tanto para la aplicación como para la base de datos.
 
 Algunos de los conceptos de las bases de datos orientadas a objetos importantes:
 \begin{itemize}
@@ -22,40 +27,58 @@ Algunos de los conceptos de las bases de datos orientadas a objetos importantes:
 \end{itemize}
 
 \subsubsection{Objetos Complejos}
-Un objeto complejo es un objeto que contiene en su definición otros objetos, esto forma una jerarquía de continentes. Por ejemplo: Un objeto
-Bicicleta puede contener otros objetos como rueda, cambio, freno, etc. Un objeto complejo se representa mediante un grafo acíclico dirigido
-(GAD).
+Un objeto complejo es un objeto que contiene en su definición otros
+objetos, esto forma una jerarquía de continentes. Por ejemplo: Un
+objeto Bicicleta puede contener otros objetos como rueda, cambio,
+freno, etc. Un objeto complejo se representa mediante un grafo
+acíclico dirigido (GAD).
 
 \subsubsection{Identidad de los Objetos}
-En orientación a objetos no es necesario que el usuario le proporcione un identificador al objeto, esto lo hace el sistema, al crearse un
-neuvo objeto el sistema automaticaménte el asigna un identificador de objeto (OID). Estos identificadores son únicos e inmutables es decir
-no cambian y no se reasignan. Al ser direcciones de memoria no son fáciles de recordar y además son únicos dentro de un sistema cuando yo
-traduzco a otro sistema esos identificadores no se van a mantener.
+En orientación a objetos no es necesario que el usuario le
+proporcione un identificador al objeto, ya que el sistema le asigna
+uno al objeto cuando es creado. Estos identificadores (OID)
+son únicos e inmutables es decir no cambian y no se reasignan. Al ser
+direcciones de memoria no son fáciles de recordar y además son únicos
+dentro de cada sistema.
 
 \subsubsection{Lenguajes de Programación Orientados a Objetos}
-Estos lenguajes permiten la persistencia de datos es decir almacenarlos en un disco duro, son lenguajes extendidos ya que mediante
-constructores nos permiten el tratamiento de datos persistentes esto hace que el lenguaje de consulta esté totalmente integrado con el
-lenguaje anfitrión.
+Estos lenguajes permiten la persistencia de datos es decir
+almacenarlos en un disco duro, son lenguajes extendidos ya que
+mediante constructores nos permiten el tratamiento de datos
+persistentes esto hace que el lenguaje de consulta esté totalmente
+integrado con el lenguaje anfitrión.
 
-Algunos inconvenientes de los lenguajes OO es que son potentes y complejos por lo que resulta más sencillo cometer errores que dañen la base
-de datos. Es complejo realizar optimizaciones por ejemplo de reducción de E/S a disco ya que está integrado con el mismo lenguaje
-posiblemente se podría realizar una optimización externa al lenguaje de programación.
+Algunos inconvenientes de los lenguajes OO es que son potentes y
+complejos por lo que resulta más sencillo cometer errores que dañen
+la base de datos. Es complejo realizar optimizaciones por ejemplo de
+reducción de E/S a disco ya que está integrado con el mismo lenguaje
+posiblemente se podría realizar una optimización externa al lenguaje
+de programación.
 
 \subsubsection{Mecanismos de Persistencia}
-Los lenguajes de programación orientados a objetos realizan la persistencia utilizando mecanismos como constructores, funciones,
+Los lenguajes de programación orientados a objetos realizan la
+persistencia utilizando mecanismos como constructores, funciones,
 primitivas,etc. Hay cuatro tipos de formas de lograr persistencia:
 
 \begin{itemize}
-  \item Persistencia por Clases: Se declara una clase persistente y todos los objetos que sean instancias de dicha clase serán persistentes
-    de manera predeterminada.
-  \item Persistencia por Creación: Se crea la clase como transitoria es decir solo va a estar en memoria pero al momento de crear los
-    objetos de esa clase de acuerdo a la manera de crear se decide si son objetos persistentes o no.
-  \item Persistencia por Marca: Los objetos se crean originalmente como transitorios y al momento de decidir si se persiste o no, se marca
-    efectivamente como persistente.
-  \item Persistencia por Referencia: En este enfoque se declara como persistente uno o varios objetos (objeto raíz) de manera explícita y un
-    objeto solo sera persistente si se hace referencia a él de manera directa o indirecta desde el objeto raíz. Esto provoca que sean
-    persistentes estructuras de datos completas además puede ser costoso debido a la cantidad de referencias y se puede perder la pista de
-    que objetos son persistentes y cuales no.
+  \item Persistencia por Clases: Se declara una clase persistente y
+    todos los objetos que sean instancias de dicha clase serán
+    persistentes de manera predeterminada.
+  \item Persistencia por Creación: Se crea la clase como transitoria
+    es decir solo va a estar en memoria pero al momento de crear los
+    objetos de esa clase de acuerdo a la manera de crear se decide si
+    son objetos persistentes o no.
+  \item Persistencia por Marca: Los objetos se crean originalmente
+    como transitorios y al momento de decidir si se persiste o no, se
+    marca efectivamente como persistente.
+  \item Persistencia por Referencia: En este enfoque se declara como
+    persistente uno o varios objetos (objeto raíz) de manera
+    explícita y un objeto solo sera persistente si se hace referencia
+    a él de manera directa o indirecta desde el objeto raíz. Esto
+    provoca que sean persistentes estructuras de datos completas
+    además puede ser costoso debido a la cantidad de referencias y se
+    puede perder la pista de que objetos son persistentes y cuales
+    no.
 \end{itemize}
 
 \subsubsection{Acceso a Objetos Persistentes}
@@ -155,8 +178,7 @@ estas bases de datos se le agregan algunas características más interesantes y 
 \subsubsection{Constructores de Tipos}
 Para especificar estructuras de objetos complejos se utilizan los user-defined types (UDTs) y a su vez poder separar la declaracion de tipos
 de la creación de una tabla. En cuanto a los tipos acepta tipos primitivos y además utilizar atributos que sean estructuras de datos como
-list, set, setlist, etc. Al permitir que un atributo sea una estrucutra de datos ya perdemos la propiedad de atomicidad en dichos atributos
-ya que pueden tener más de un valor. \\
+list, set, setlist, etc.
 
 \begin{lstlisting}[language=OQL]
 CREATE TYPE tipo_telefonos AS(

@@ -421,8 +421,9 @@
   \subsection{Algoritmos para alcanzar 3FN y FNBC}
 
   \subsubsection{Algoritmo - 3FN Preservación DFs}
-  Entrada: Un esquema de relación R y un conjunto de DFs que no cumple 3FN.
-  Salida: Una descomposición $\rho$ en 3FN de R que preserva DFs.
+  \noindent Entrada: Un esquema de relación R y un conjunto de DFs que no cumple 3FN.
+
+  \noindent Salida: Una descomposición $\rho$ en 3FN de R que preserva DFs.
 
   \begin{enumerate}
     \item Encontrar un cubrimento minimal G para F.
@@ -465,14 +466,20 @@
   \section{Resumen}
   \noindent La FNBC es la FN más alta
   \begin{itemize}
+    \item Garantiza la integridad de los datos.
     \item Permite eliminar el mayor número de redundancias posibles.
     \item Es posible alcanzar una descomposición JSP.
     \item No siempre se logra preservar dependencias.
+    \item Mayor complejidad a la hora de recuperar datos.
+    \item Mayor complejidad a la hora de calcular datos derivados.
   \end{itemize}
   La 3FN
   \begin{itemize}
+    \item Reducción de redundancia de datos y espacio de
+      almacenamiento.
     \item Permite alcanzar una descomposición JSP.
     \item Se logra preservar dependencias.
     \item Pueden existir dependencias transitivas de atributos primos.
+    \item Mayor complejidad a la hora de recuperar datos.
   \end{itemize}
   Cuando no podemos alcanzar una descomposición FNBC-JSP-PD, podemos aceptar una descomposición 3FN-JSP-PD.

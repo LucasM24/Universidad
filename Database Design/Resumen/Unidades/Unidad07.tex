@@ -1,0 +1,91 @@
+\section{Unidad 07 - Bases de Datos Distribuidas}
+Consiste en un conjunto de nodos que están conectados entre si por
+medio de una red y cada nodo hay un sistema gestor de bases de datos
+que puede ser de distinta arquitectura pero todos esos sitios donde
+hay un sistema gestor están de acuerdo de trabajar juntos. Es por que
+hay un monton de coordinaciones que se deben hacer entre los sitios
+para ejecutar las transacciones en una base de datos ya que requieren
+que trabajen juntos.
+
+Es una colección de multiples bases de datos interrelacionadas
+lógicamente distribuidas a través de una red de comunicación, y un
+sistema de administración de bases de datos distribuidas (DDBMS) como
+un sistema de software que administra una base de datos distribuidas
+mientras hace que la distribución sea transparente para el usuario.
+Con esto un usuario en un sitio puede acceder a datos en cualquier
+lugar de la red como si esos datos estuvieron almacenados en su
+propio sitio.
+
+\subsection{Características de una Base de Datos Distribuida}
+Para que una base de datos se llame distribuida deben cumplirse las
+siguientes condiciones mínimas.
+
+\begin{itemize}
+  \item Es fundamental que las bases de datos estén lógicamente
+    relacionadas.
+  \item Debe existir conexión entre los nodos a traves de una red.
+  \item No es necesario que todos los nodos sean identicos en
+    términos de datos, hardware y software.
+\end{itemize}
+
+\subsubsection{Ventajas}
+\begin{itemize}
+  \item Naturaleza distribuida de algunas aplicaciones: Combina con
+    el diseño de las empresas es decir, estas se dividen por sectores,
+    departamentos entonces los datos del sector serían locales para
+    cada sector y los demás se acceden cuando se los necesite.
+  \item El diseño distribuido combina, la eficencia de procedimiento
+    es decir los datos están almacenados cerca del punto del cual se
+    utilizan con mayor frecuencia y provee un mayor accesiblidad ya
+    que se puede acceder a datos de otros nodo  a través de la red de
+    comunicaciones.
+  \item Posibilidad de compartir los datos y a su vez ejercer un
+    control sobre los datos locales.
+  \item Mayor rendimiento: Bases de datos locales más pequeñas, menor
+    carga de transacciones y el procesamiento de varias transacciones
+    a distintos sitios puede ejecutarse en paralelo.
+\end{itemize}
+\subsubsection{Desventajas}
+\begin{itemize}
+  \item Aumento de complejidad tanto en el diseño como la
+    implementación del sistema distribuido base de datos.
+  \item Debe tener capacidad de acceder a sitios remotos, elaborar
+    estrategias para la ejecución de consultas y transacciones que
+    accedan a más de un sitio, determinar a que sitio se va a buscar
+    la información, mantener la consistencia entre los sitios y
+    recuperar a caídas en sitios individuales.
+\end{itemize}
+
+\subsection{Características}
+Para que una base de datos se llame distribuida deben cumplirse las
+siguientes condiciones mínimas.
+\subsubsection{Condición Primordial}
+Es la base de todas las demás características, se basa en que para un
+usuario, un sistema distribuido debería verse exactamente igual que
+un sistema no distribuido y todos los problemas de un sistema
+distribuido deberían ser a nivel de implementación o internos.
+\subsubsection{No Debe Haber Dependencia de un Sitio Central}
+No debe haber dependencia de un sitio central para obtener un
+servicio maestro por ejemplo, por ejemplo un procesamiento central
+para las consultas o una administración centralizada para las
+transacciones, de modo que todo el sistema dependa de ese sitio
+central. Esto es por que el sitio central puede ser un cuello de
+botella o también todo el sistema se vuelve más vulnerable ya que si
+el sitio sufriera un despefecto todo el sistema dejaría de funcionar.
+\subsubsection{Operación Continua}
+El sistema nunca debe apagarse a proposito para realizar operaciones
+como añadir un nuevo sitio o instalar una versión mejorada del SGBD
+en un sitio ya existente.
+\subsubsection{Autonomía}
+La autonamía determina hasta que punto los nodos existentes o las
+bases de datos en un sistema de bases de datos conectadas pueden
+operar de forma independiente. Se definen varios tipos:
+\begin{itemize}
+  \item Autonomía de diseño: Se refiere a la indenpendencia del uso
+    del modelo de datos y las técnicas de gestión de transacciones
+    entre los nodos. 
+  \item Autonomía de Comunicación: Determina hasta que punto cada
+    nodo puede compartir información con otros nodos.
+  \item Autonomía de Ejecución: Se refiere a la independencia de los
+    usuario para actuar como deseen.
+\end{itemize}
