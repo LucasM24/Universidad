@@ -116,6 +116,7 @@
 + Según la declaración de un importador de automóviles, en el último embarque había 9 autos blancos,
   8 rojos y 3 negros.
     // Falta definir el espacio muestra y  centrar lo que está debajo
+
   B: El auto es blanco; R: El auto es rojo; N: El auto es negro;
 
   $P(B) = 9/20 P(R) = 8/20 P(N) = 3/20$
@@ -138,4 +139,37 @@
       // $P((B sect R)) = 8/20 dot.op 7/19 dot.op 6/18 = 0.064$
       $P(B_1 R_2 R_3) + P(R_1 R_2 B_3) + P(R_1 B_2 R_3) = 9/20 dot.op 8/19 dot.op 7/18 + 8/20 dot.op
       7/19 dot.op 9/18 + 8/20 dot.op 9/19 dot.op 7/18 = 0,221$
-      
++ En un grupo de 100 personas, 50 escuchan las noticias por radio, 70 ven las noticias por TV y 30 escuchan la radio y ven la TV. Calcula las probabilidades de los siguientes sucesos:      
+
+  #table(
+    columns: 4,
+    [],[*R*], [*NoR*],[*Total*],
+    [*Tv*],[30], [40],[70],
+    [*NoTv*],[20], [10],[30],
+    [*Total*],[50], [50],[100],
+  )
+
+  #set enum(numbering: "a.")
+  + No escucha la radio y no ve la TV.
+
+    $P("NoR" sect "NoTv") = 10/100 = 0,1$
+
+  + Escucha la radio, pero no ve la TV.
+
+    $P("R" sect "NoTv") = 20/100 = 0,2$
+
+  + Escucha la radio o ve la TV.
+
+    $P("R" union "Tv") = 50/100 + 70/100 - 30/100= 0,5 + 0,7 - 0,3 = 0,9$
+
++ Tres urnas contienen:
+// Falta representar el espacio muestra
+
+  A: una bolilla blanca y dos negras B: tres blancas y una negra C: dos blancas y tres negras
+
+Se extrae una bolilla al azar de cada urna. ¿Cuál es la probabilidad de que
+entre las tres bolillas haya dos blancas y una negra?
+
+  $P(B_1B_2N_3) + P(B_1N_2B_3) + P(N_1B_2B_3) = 1/3 dot.op 3/4 dot.op 3/5 + 1/3 dot.op 1/4 dot.op 2/5 + 2/3 dot.op 3/4 dot.op 2/5 = 0,15 + 0,033 + 0,2 = 0,383$
+
+  Entonces la probabilidad de que al sacar tres bolillas al azar de cada urna haya dos blancas y una negra es es 38,3%
