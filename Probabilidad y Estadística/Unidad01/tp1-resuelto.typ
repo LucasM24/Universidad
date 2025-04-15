@@ -1,3 +1,5 @@
+#import "@preview/fletcher:0.5.7" as fletcher: diagram, node, edge
+
 + Dar un espacio muestral $(Omega)$ adecuado para los siguientes experimentos:
   #set enum(numbering: "Ex1:")
   + "Lanzar una moneda una vez"
@@ -162,14 +164,120 @@
 
     $P("R" union "Tv") = 50/100 + 70/100 - 30/100= 0,5 + 0,7 - 0,3 = 0,9$
 
-+ Tres urnas contienen:
-// Falta representar el espacio muestra
++ Tres urnas contienen: A: una bolilla blanca y dos negras B: tres blancas y
+  una negra C: dos blancas y tres negras. Se extrae una bolilla al azar de cada urna.
 
-  A: una bolilla blanca y dos negras B: tres blancas y una negra C: dos blancas y tres negras
+  // Falta representar el espacio muestra
+   - ¿Cuál es la probabilidad de que entre las tres bolillas haya dos blancas y una negra?
 
-Se extrae una bolilla al azar de cada urna. ¿Cuál es la probabilidad de que
-entre las tres bolillas haya dos blancas y una negra?
+        $P(B_1B_2N_3) + P(B_1N_2B_3) + P(N_1B_2B_3) = 1/3 dot.op 3/4 dot.op 3/5 + 1/3
+        dot.op 1/4 dot.op 2/5 + 2/3 dot.op 3/4 dot.op 2/5 = 0,15 + 0,033 + 0,2 =
+        0,383$
 
-  $P(B_1B_2N_3) + P(B_1N_2B_3) + P(N_1B_2B_3) = 1/3 dot.op 3/4 dot.op 3/5 + 1/3 dot.op 1/4 dot.op 2/5 + 2/3 dot.op 3/4 dot.op 2/5 = 0,15 + 0,033 + 0,2 = 0,383$
+  // Entonces la probabilidad de que al sacar tres bolillas al azar de cada urna haya dos blancas y una negra es es $38,3%$
 
-  Entonces la probabilidad de que al sacar tres bolillas al azar de cada urna haya dos blancas y una negra es es 38,3%
++ Se tienen dos bolilleros (S y T): el primero tiene 3 bolillas azules y 5
+  blancas, el segundo tiene 4 azules y 4 blancas. Se extrae una bolilla de “S”
+  y se coloca sin verla en “T”.
+
+  #v(40pt)
+  #align(center)[
+
+  #diagram(
+    debug: true,
+    node((0,1), $S$, name: <S>),
+    node((1,0.25), $A$, name: <A>),
+    node((1,1.75), $B$, name: <B>),
+    node((2,-0.15), $A$, name: <E>),
+    node((2, 0.75), $B$, name: <F>),
+    node((2,2), $B$, name: <C>),
+    node((2,1), $A$, name: <D>),
+    edge(<S>, <A>, "->", label: $3/8$),
+    edge(<S>, <B>, "->", label: $5/8$, label-sep: -20pt),
+    edge(<A>, <E>, "->", label: $5/9$,),
+    edge(<A>, <F>, "->", label: $4/9$, label-sep: -20pt),
+    edge(<B>, <D>, "->", label: $4/9$, label-sep: 0pt),
+    edge(<B>, <C>, "->", label: $5/9$, label-sep: -20pt),
+  )]
+
+  #set enum(numbering: "a.")
+  + ¿Cuál es la probabilidad de que al extraer una bolilla de “T” resulte blanca?
+
+    $P(B_1B_2) = 5/8 dot.op 5/9 + 3/8 dot.op 4/9 = 0,5138 = 51,38%$ 
+
+  + Si se saca una bolilla de “T” y resulta ser blanca. ¿Cuál es la
+    probabilidad de que la bolilla pasada de “S” a “T” fuese blanca?
+
+    $P(B/B) = 5/8 dot.op 5/9 = 0,3472 = 34,72%$
+
++ Ejercicio 8
+
+  D1: Diseño 1, D2: Diseño 2
+
+  $P("D1") = 0,6 dot.op 0,6 + 0,6 dot.op 0,6 = 0,72 = 72%$
+
+  $P("D2") = 0,6 dot.op 0,6 dot.op 0,6 = 0,216 = 21,6%$
+
+  Luego podemos ver que en el diseño 1 la corriente tiene un 72% de
+  probabilidad de circular entre el punto a y el punto b frente al 32,6% que
+  ofrece el diseño 2. Por lo tanto el ingeniero debe escoger el diseño 1.
+
++ La probabilidad de que aumenten las ventas de automóviles para el próximo mes (A) es
+  estimada en 0.4. La probabilidad de que aumente la venta de repuestos (R) se calcula en 0.5. La
+  probabilidad de que ambas industrias experimenten un aumento en las ventas se calcula en 0.1.
+
+  // Siendo $Omega$:
+  // #align(center)[
+  //   #table(
+  //     columns: 4,
+  //     [],[*A*], [*NoA*],[*Total*],
+  //     [*R*],[0,1], [0,4],[0,5],
+  //     [*NoR*],[0,3], [0,2],[0,5],
+  //     [*Total*],[0,4], [0,6],[1],
+  //   )
+  // ]
+
+  #set enum(numbering: "a.")
+  + Calcular la probabilidad de que:
+    #set enum(numbering: "i.")
+    + Aumente las ventas de automóviles, dado que ha aumentado las ventas de repuestos.
+
+      $P(A\/R) =  P(A sect R ) \/ P(A) = 0,1 \/ 0,4 = 0,25$
+
+      La probabilidad de que aumente la venta de automóviles dado que aumento
+      la venta de repuestos es de 25%
+
+    + Aumente la venta de repuestos si la venta de automóviles se ha incrementado durante el mes.
+
+      $P(R\/A) =  P(A sect R ) \/ P(R) = 0,1 \/ 0,5 = 0,2$
+
+      La probabilidad de que aumente la venta de repuestos dado que aumentó la
+      venta de automóviles es de 20%
+
+    + Determinar si los eventos son excluyentes
+
+      A y R son excluyentes sí: $A sect R eq emptyset$
+
+      Como $P(A sect R) = 0,1$ entonces los sucesos no son excluyentes.
+
+  + Determinar si los eventos son o no independientes
+
+    Sí A y R son independientes entonces $P(A sect R) = P(A) dot.op P(R)$
+
+    $P(A) = 0,4$
+
+    $P(R) = 0,5$
+
+    $P(A sect R) = 0,1$
+
+    Como $P(A sect R) eq.not P(A) dot.op P(R)$ entonces A y R no son indenpendientes.
+
++ Tres máquinas producen respectivamente el 50%, el 30% y el 20% de la producción total de
+  la fábrica. El porcentaje de producción defectuosa de estas máquinas es respectivamente: el 3%, 4% y 5%.
+  Se selecciona un artículo al azar:
+
+  #set enum(numbering: "a.")
+  + ¿cuál es la probabilidad de que resulte defectuoso?
+
+  + Si el artículo resultó ser defectuoso, ¿cuál es la probabilidad de que lo haya producido la Máquina 1?
+    
