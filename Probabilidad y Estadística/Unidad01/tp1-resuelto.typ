@@ -184,16 +184,16 @@
   #align(center)[
 
   #diagram(
-    debug: true,
-    node((0,1), $S$, name: <S>),
+    debug: 0,
+    node((0,1), $Omega$, name: <S>),
     node((1,0.25), $A$, name: <A>),
     node((1,1.75), $B$, name: <B>),
     node((2,-0.15), $A$, name: <E>),
     node((2, 0.75), $B$, name: <F>),
     node((2,2), $B$, name: <C>),
     node((2,1), $A$, name: <D>),
-    edge(<S>, <A>, "->", label: $3/8$),
-    edge(<S>, <B>, "->", label: $5/8$, label-sep: -20pt),
+    edge(<S>, <A>, "->", label: $3/5$),
+    edge(<S>, <B>, "->", label: $2/5$, label-sep: -20pt),
     edge(<A>, <E>, "->", label: $5/9$,),
     edge(<A>, <F>, "->", label: $4/9$, label-sep: -20pt),
     edge(<B>, <D>, "->", label: $4/9$, label-sep: 0pt),
@@ -203,12 +203,12 @@
   #set enum(numbering: "a.")
   + ¿Cuál es la probabilidad de que al extraer una bolilla de “T” resulte blanca?
 
-    $P(B_1B_2) = 5/8 dot.op 5/9 + 3/8 dot.op 4/9 = 0,5138 = 51,38%$ 
+    $P(B_1B_2) = 3/5 dot.op 5/9 + 2/5 dot.op 5/9 = 0,4888 = 48,88%$ 
 
   + Si se saca una bolilla de “T” y resulta ser blanca. ¿Cuál es la
     probabilidad de que la bolilla pasada de “S” a “T” fuese blanca?
 
-    $P(B/B) = 5/8 dot.op 5/9 = 0,3472 = 34,72%$
+    $P(B/B) = 2/5 dot.op 5/9 = 0,3472 = 34,72%$
 
 + Ejercicio 8
 
@@ -272,12 +272,53 @@
 
     Como $P(A sect R) eq.not P(A) dot.op P(R)$ entonces A y R no son indenpendientes.
 
-+ Tres máquinas producen respectivamente el 50%, el 30% y el 20% de la producción total de
-  la fábrica. El porcentaje de producción defectuosa de estas máquinas es respectivamente: el 3%, 4% y 5%.
-  Se selecciona un artículo al azar:
++ Tres máquinas producen respectivamente el 50%, el 30% y el 20% de la
+  producción total de la fábrica. El porcentaje de producción defectuosa de
+  estas máquinas es respectivamente: el 3%, 4% y 5%. Se selecciona un artículo
+  al azar:
+
+    #v(6pt)
+    #align(center)[
+      #diagram(
+        debug: 0,
+        node((0,1), $Omega$, name: <A>),
+        node((1,0), $M_1$, name: <B>),
+        node((1,1), $M_2$, name: <C>),
+        node((1,2), $M_3$, name: <D>),
+        node((2, -0.25), "D", name: <E>),
+        node((2, 0.25), "ND", name: <F>),
+        node((2, 0.75), "D", name: <G>),
+        node((2, 1.25), "ND", name: <H>),
+        node((2, 1.75), "D", name: <I>),
+        node((2, 2.25), "ND", name: <J>),
+        edge(<A>, <B>, "->", label: $0,5$),
+        edge(<A>, <C>, "->", label: $0,3$, label-sep: -15pt),
+        edge(<A>, <D>, "->", label: $0,2$, label-sep: -30pt),
+        edge(<B>, <E>, "->", label: $0,03$, label-anchor: "south"),
+        edge(<B>, <F>, "->", label: $0,97$, label-anchor: "north", label-sep: -5pt),
+        edge(<C>, <G>, "->", label: $0,04$, label-anchor: "south"),
+        edge(<C>, <H>, "->", label: $0,96$, label-anchor: "north", label-sep: -4pt),
+        edge(<D>, <I>, "->", label: $0,05$, label-sep: 0pt),
+        edge(<D>, <J>, "->", label: $0,95$, label-anchor: "north", label-sep: -4pt),
+      )
+    ]
 
   #set enum(numbering: "a.")
-  + ¿cuál es la probabilidad de que resulte defectuoso?
-
-  + Si el artículo resultó ser defectuoso, ¿cuál es la probabilidad de que lo haya producido la Máquina 1?
+  + ¿Cuál es la probabilidad de que resulte defectuoso?
     
+    $P(D) = P(M_1 sect D) + P(M_2 sect D) + P(M_3 sect D) =$
+
+    #h(30pt) $= 0,5 dot.op 0,03 + 0,3 dot.op 0,04 + 0,2 dot.op 0,05 =$
+
+    #h(30pt) $= 0,015 + 0,012 + 0,01 = 0,037%$
+
+    La probabilidad de seleccionar un articulo al azar y que dicho articulo sea
+    defectuoso es del 3,7%
+
+  + Si el artículo resultó ser defectuoso, ¿cuál es la probabilidad de que lo
+    haya producido la Máquina 1?
+
+    $P(D\/M_1) = P(D sect M_1) / P(D) = (0,5 dot.op 0,03) / (0,037) = (0,015) / (0,037) = 0,4054$
+
+    Si seleccionamos un articulo al azar y es defectuoso hay una probabilidad
+    del 40,54% que ese articulo haya sido producido por la máquina 1.
