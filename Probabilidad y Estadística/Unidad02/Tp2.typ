@@ -57,7 +57,7 @@
 
   + Grafique la función de cuantía y la función de distribución acumulada calculadas en a).
 
-#let points(offset: 0) = ((0, 0.5625), (1, 0.375), (2, 0.0625)).map(((x,y)) => { (x,y) })
+  #let points(offset: 0) = ((0, 0.5625), (1, 0.375), (2, 0.0625)).map(((x,y)) => { (x,y) })
 
   #cetz.canvas({
     // Your plot/chart code goes here
@@ -71,7 +71,7 @@
         y-grid: true,
         stroke: "stroke",
         {
-          plot.add(domain: (0, 3), t => (2 * t))
+          plot.add(domain: (0, 3), t => (t * t))
           // plot.add(((-1,0),(0,0.5625), (1,1), (2,.5), (4,3)))
           // plot.add(points(offset: 0), line: (type: "hvh"))
         }
@@ -80,3 +80,61 @@
 
   #cetz.draw.set-style(barchart: (bar-width: 1))
 
++ Considere el experimento de lanzar 2 dados y observar sus caras.
+  
+  #set enum(numbering: "a.")
+  + Construir la variable aleatoria X: Suma de los resultados de cada dado, halle la función de cuantía y la
+    función de distribución de probabilidad acumulada.
+    
+    - $X$ es una variable aleatoria discreta cuantitativa.
+
+    - $X =$ Suma del resultado de los dos dados.
+    
+    - $R_x = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}$
+
+    - $P(2) = P((1, 1)) = 1/36$
+
+    - $P(3) = P((1, 2)) + P((2, 1)) = 1/36 + 1/36 = 2/36$
+
+    - $P(4) = P((2, 2)) + P((1, 3)) + P((3, 1)) = 1/36 + 1/36 + 1/36 = 3/36$
+
+    - $P(5) = P((2, 3)) + P((3, 2)) + P((4, 1)) + P((1, 4)) = 1/36 + 1/36 + 1/36 + 1/36 = 4/36$
+
+    - $P(6) = P((3, 3)) + P((1, 5)) + P((5, 1)) + P((2, 4)) + P((4, 2)) = 1/36 + 1/36 + 1/36 + 1/36
+
+      + 1/36 = 5/36$
+
+    - $P(7) = P((1, 6)) + P((6, 1)) + P((2, 5)) + P((5, 2)) + P((3, 4)) + P((4, 3))= 1/36 + 1/36 +
+
+      1/36 + 1/36 + 1/36 + 1/36 = 6/36$
+
+    - $P(8) = P((2, 6)) + P((6, 2)) + P((3, 5)) + P((5, 3)) + P((3, 5)) + P((4, 4)) = 1/36 + 1/36 +
+      1/36 + 1/36 + 1/36 + 1/36 = 6/36$
+
+    - $P(9) = P((3, 6)) + P((6, 3)) + P((4, 5)) + P((5, 4)) = 1/36 + 1/36 + 1/36 + 1/36 = 4/36$
+
+    - $P(10) = P((4, 6)) + P((6, 4)) + P((5, 5)) = 1/36 + 1/36 + 1/36 = 3/36$
+
+    - $P(11) = P((5, 6)) + P((6, 5)) = 1/36 + 1/36 = 2/36$
+
+    - $P(12) = P((6, 6)) = 1/36$
+
+    #align(center)[
+      #table(
+        columns: 3,
+        [*X*],[*P(X)*], [*F(X)*],
+        [2],[$1/36$], [$1/36$],
+        [3],[$2/36$], [$3/36$],
+        [4],[$3/36$], [$6/36$],
+        [5],[$4/36$], [$10/36$],
+        [6],[$5/36$], [$15/36$],
+        [7],[$6/36$], [$21/36$],
+        [8],[$6/36$], [$27/36$],
+        [9],[$4/36$], [$31/36$],
+        [10],[$3/36$], [$33/36$],
+        [11],[$2/36$], [$35/36$],
+        [12],[$1/36$], [$36/36$],
+      )
+    ]
+
+  + Grafique ambas funciones.
