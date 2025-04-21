@@ -218,3 +218,56 @@
 
     - $sqrt(σ^2(X)) = sqrt(1.8475) = 1.359$
 
++ Sea X una v.a. continua que se distribuye según:
+  
+  $f(x) = cases( 1\/2 #h(20pt) 0 <= #h(5pt) x #h(5pt)<= 2, 0 #h(28pt) forall_"otro" x)$
+
+  #set enum(numbering: "a.")
+  + Verifique que f(x) es función de densidad. Grafique f(x).
+    Para verificar que $f(x)$ es función de densidad se deben cumplir dos condiciones:
+
+    #set enum(numbering: "1.")
+    + $f(x) >= 0 #h(5pt) forall x in R_x$ 
+
+      - $1/2 >= 0 #h(5pt) forall x in [0, 2]$ 
+
+    + La integral de X definida entre a y b debe ser 1.
+
+      - $1/2 >= 0 #h(5pt) forall x in [0, 2]$ 
+
+  + Halle la función de distribución acumulada. Grafíquela.
+  + Calcule y represente gráficamente las siguientes probabilidades:
+    #set enum(numbering: "i.")
+      + $P(0,5 < 𝑥 < 1,2)$
+
+      + $𝑃(𝑥 > 1,5)$
+
+      + $P(x<=1.7)$
+
+      + $P( 𝑥 =1)$
+
+      + $F(-1)$
+
+      + $F(1,7)$
+
+      + $F(4)$
+
+  + Calcule E(x) y σ(x).
+
+  // #let f(x) = x + 3
+  // #let g(x) = #f(x) * x
+  // #let h(x) = #sin(#g(x))
+
+  // #show math.equation: set text(12pt)
+  //
+  // #math.equation(
+  //   "The function f(x) is defined as ",
+  // f(x),
+  //   " and g(x) is ",
+  //   g(x),
+  //   ". The value of h(2) is approximately ",
+  //   h(2)
+  // )
+
+  #set math.equation(block: true)
+
