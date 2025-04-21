@@ -57,28 +57,8 @@
 
   + Grafique la función de cuantía y la función de distribución acumulada calculadas en a).
 
-  #let points(offset: 0) = ((0, 0.5625), (1, 0.375), (2, 0.0625)).map(((x,y)) => { (x,y) })
+  // Falta graficar
 
-  #cetz.canvas({
-    // Your plot/chart code goes here
-      plot.plot(
-        size: (10,10),
-        min: -4,
-        max: 20,
-        x-tick-step: 1, 
-        y-tick-step: 0.2, 
-        x-grid: false, 
-        y-grid: true,
-        stroke: "stroke",
-        {
-          plot.add(domain: (0, 3), t => (t * t))
-          // plot.add(((-1,0),(0,0.5625), (1,1), (2,.5), (4,3)))
-          // plot.add(points(offset: 0), line: (type: "hvh"))
-        }
-     )
-  })
-
-  #cetz.draw.set-style(barchart: (bar-width: 1))
 
 + Considere el experimento de lanzar 2 dados y observar sus caras.
   
@@ -138,3 +118,103 @@
     ]
 
   + Grafique ambas funciones.
+
++ Una compañía especializada en la instalación de sistemas de calefacción central, estimó que la
+  demanda de instalación de equipos en período preinvernal tiene la siguiente función de cuantía.
+
+      #align(center)[
+        #table(
+          columns: 7,
+          [*N*$degree$ *Equipos*],[$0$],[$1$],[$2$],[$3$],[$4$],[$5$],
+          [*Probabilidad*],[$0.10$],[$0.14$],[$0.26$],[$0.28$],[$0.15$],[$0.07$],
+        )
+      ]
+
+  #set enum(numbering: "a.")
+  + Defina la variable aleatoria e indique Rx
+
+    $X$: Cantidad de instalaciones en período invernal.
+
+    $R_x = {0, 1, 2, 3, 4, 5}$
+
+      #align(center)[
+        #table(
+          columns: 3,
+          [$X$],[$P(X)$], [$F(X)$],
+          [$0$],[$0.1$],[$0.1$],
+          [$1$],[$0.14$],[$0.24$],
+          [$2$],[$0.26$],[$0.50$],
+          [$3$],[$0.28$],[$0.78$],
+          [$4$],[$0.15$],[$0.93$],
+          [$5$],[$0.07$],[$1$]
+        )
+      ]
+
+  + Grafique la función de cuantía y de probabilidad acumulada.
+
+    #cetz.canvas({
+      // Your plot/chart code goes here
+        cetz.draw.set-style(columnchart: (bar-width: 0.1))
+        chart.columnchart(
+          y-tick-step: none,
+          y-ticks: ((.1), (.14), (.26), (.28), (.15), (.07)),
+          x-label: $X$,
+          y-label: $P(X)$,
+          size: (10, 10),
+          ((0, .10), (1, .14), (2, .26), (3, .28), (4, .15), (5, .07)),
+       )
+    })
+
+    #cetz.canvas({
+      // Your plot/chart code goes here
+        cetz.draw.set-style(columnchart: (bar-width: 1))
+        chart.columnchart(
+          y-tick-step: none,
+          y-ticks: ((.1), (.24), (.5), (.78), (.93), (1)),
+          x-label: $X$,
+          y-label: $F(X)$,
+          size: (10, 10),
+          ((0, .10), (1, .24), (2, .50), (3, .78), (4, .93), (5, 1)),
+       )
+    })
+
+  + Calcule la probabilidad de que durante ese período se requiera la instalación de:
+
+    #set enum(numbering: "i.")
+    + Exactamente 3 equipos
+
+      - $P(X=3) = 0.28$
+      
+      La probabilidad de que durante el período invernal se requiera instalar exactamente 3 equipos
+      es del 28% 
+
+    + Como máximo 3 equipos
+
+      - $P(X<=3) = 0.78$
+
+      La probabilidad de que durante el período invernal se requiera instalar como máximo 3 equipos
+      es del 78% 
+
+    + Al menos 3 equipos
+
+      - $P(X<3) = 0.50$
+
+      La probabilidad de que durante el período invernal se requiera instalar al menos 3 equipos
+      es del 50% 
+
+  + Calcule e interprete $E(X)$. Calcule $σ(X)$
+
+    - $E(X) = 0 dot.op 0.10 + 1 dot.op 0.14 + 2 dot.op 0.26 + 3 dot.op 0.28 +4 dot.op 0.15 + 5 dot.op
+    0.07 = 2.45$
+
+      Se espera que en promedio se instalen 2.45 equipos en el período invernal.
+
+    - $E(X^2) = 0^2 dot.op 0.10 + 1^2 dot.op 0.14 + 2^2 dot.op 0.26 + 3^2 dot.op 0.28 + 4^2
+    dot.op 0.15 + 5^2 dot.op 0.07 = 0 + 0.14 + 1.04 + 2.52 + 2.4 + 1.75 = 7,85$
+
+    - $E(X)^2 = (2.45)^2 = 6.0025$
+
+    - $σ^2(X) = E(X^2) - E(X)^2 = 7.85 - 6.0025 = 1.8475$
+
+    - $sqrt(σ^2(X)) = sqrt(1.8475) = 1.359$
+
