@@ -57,7 +57,7 @@
 
   + Grafique la función de cuantía y la función de distribución acumulada calculadas en a).
 
-#let points(offset: 0) = ((0, 0.5625), (1, 0.375), (2, 0.0625)).map(((x,y)) => { (x,y) })
+  #let points(offset: 0) = ((0, 0.5625), (1, 0.375), (2, 0.0625)).map(((x,y)) => { (x,y) })
 
   #cetz.canvas({
     // Your plot/chart code goes here
@@ -78,5 +78,20 @@
      )
   })
 
-  #cetz.draw.set-style(barchart: (bar-width: 1))
++ Considere el experimento de lanzar 2 dados y observar sus caras.
 
+  + Construir la variable aleatoria X: Suma de los resultados de cada dado,
+    halle la función de cuantía y la función de distribución de probabilidad
+    acumulada
+
+    X es una variable cuantitativa discreta.
+
+    X: Suma del resultado de cada dado.
+
+    $R_x = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}$
+
+    $P(2) = P((1,1)) = 1/36$
+
+    $P(2) = P((1,1)) = 1/36$
+    
+  + Grafique ambas funciones.
