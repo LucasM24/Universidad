@@ -93,3 +93,9 @@ información asociada a ese proceso en especifico. Algunas de ellas son:
 
 En resumen el PCB sirve como repositorio de todos los datos necesarios para
 iniciar o reanudar un proceso además de los datos de conteo.
+
+= Estados de un proceso
+
+Cuando se crea un proceso esta pasas por distintos estados durante su ciclo de
+vida algunos son nuevo, listo, ejecutando bloqueado, listo suspendido,
+bloqueado suspendido
