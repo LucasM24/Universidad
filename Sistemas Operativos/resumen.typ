@@ -9,6 +9,13 @@ encuentran almacenados en el sistema. Cuando un programa se encuentra en
 ejecución lo llamamos *proceso*. El sistema operativo controla la *creación*,
 *ejecución* y *finalización* de procesos.
 
+Un proceso se crea cuando:
+
+  - En la secuencia de *inicio del sistema*.
+  - Cuando una aplicación realiza un *system call* para crear un proceso.
+  - Cuando un usuario solicita ejecutar un programa ya sea traves de la linea de comandos o
+    haciendo doble click sobre un ejecutable.
+
 El estado de un proceso en ejecución es representado por el valor que tiene el
 registro *program counter* o *PC* y el contenido de los registros del
 procesador.
@@ -37,6 +44,24 @@ registro de activación es quitado de la pila.
 Aunque dos procesos esten asociados al mismo programa ellos sin embargo son
 considerados dos secuencias de ejecución separadas. Cada uno tendra sus
 secciones texto, datos, heap, stack
+
+= Creación de Procesos
+
+Durante el curso de la ejecución de un proceso dicho proceso puede crear varios procesos nuevos. El
+proceso creador es llamada *proceso padre* y los nuevos procesos son llamados procesos hijos. Cada
+uno de estos procesos hijos pueden crear nuevos procesos formando así un arbol de procesos.
+
+La mayoría de los sistemas operativos (incluyendo Unix, Linux, Windows) identifican sus procesos de
+acuerdo a un identificador único llamado process identifi o pid el cual es usualmente un número
+entero. Este identificador puede utilizarse como índice para acceder a varios atributos de un
+procesos dentro del kernel.
+
+#image("Arbol de procesos.jpg")
+
+Cuando un proceso crea un nuevo proceso existen dos posibilidades con respecto a la ejecución:
+  
+  + El padre continua ejecutandose concurrentemente con su hijo.
+  + El padre espera hasta que algun o todos sus hijos hallan terminado.
 
 = Estado de un Proceso
 
